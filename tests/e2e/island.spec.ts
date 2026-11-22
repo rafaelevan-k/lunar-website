@@ -73,4 +73,31 @@ test.describe("island preview", () => {
     const tabs = page.getByRole("tablist", { name: "Halaman" }).getByRole("tab");
     await expect(tabs.nth(3)).toHaveAccessibleName("Pengonversi berkas");
   });
+
+  // The bars start "reduced" on the first render; they must start moving after a full page load.
+  const barScales = (page: import("@playwright/test").Page) =>
+    page
+      .locator("[data-activity=recording] span.bg-lunar-recording")
+      .first()
+      .evaluate(async (bar) => {
+        const seen = new Set<string>();
+        for (let i = 0; i < 8; i++) {
+          seen.add(getComputedStyle(bar).transform);
+          await new Promise((r) => setTimeout(r, 150));
+        }
+        return seen.size;
+      });
+
+  test("the sound bars move after a full page load", async ({ page }) => {
+    await page.goto("/en");
+    await page.waitForLoadState("networkidle");
+    expect(await barScales(page)).toBeGreaterThan(2);
+  });
+
+  test("with reduced motion the sound bars stand still", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/en");
+    await page.waitForLoadState("networkidle");
+    expect(await barScales(page)).toBe(1);
+  });
 });

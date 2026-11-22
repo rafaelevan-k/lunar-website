@@ -32,10 +32,14 @@ function Bars({
         const b = 0.2 + ((i * 3 + seed * 5) % 10) / 13;
         const still = 0.3 + ((i * 5 + seed) % 7) / 12;
         return (
+          // Keyed on `reduced`: the first render is always "reduced" (the server can't know the
+          // visitor's setting), and Motion doesn't start a repeating animation when the props
+          // change afterwards, so the bar is mounted again once the real setting is known.
           <motion.span
-            key={i}
+            key={`${i}-${reduced}`}
             className={cn("h-full w-[3px] rounded-full", barClassName)}
-            style={{ originY: 0.5, scaleY: still }}
+            style={{ originY: 0.5 }}
+            initial={{ scaleY: still }}
             animate={reduced ? { scaleY: still } : { scaleY: [still, a, b, still] }}
             transition={
               reduced
