@@ -4,6 +4,7 @@ import { animate, motion, useMotionValue, type MotionValue } from "motion/react"
 import { useEffect, useId, useImperativeHandle, useRef, useState, type Ref } from "react";
 import { useReducedMotion } from "@/components/motion/ReducedMotionProvider";
 import { cn } from "@/lib/cn";
+import { readReducedMotion } from "@/lib/preferences";
 import {
   BLINK,
   between,
@@ -14,6 +15,7 @@ import {
   gazeOffset,
   SLEEP,
   SMILE,
+  WAKE,
 } from "./eyeMotion";
 
 /*
@@ -41,6 +43,8 @@ type LunarEyesProps = {
   smile?: boolean;
   /** Grow a little on hover and shrink on press, like the app. For eyes inside a button. */
   feedback?: boolean;
+  /** Start with the eyes closed and open them once they are on screen: Lunar waking up. */
+  wake?: boolean;
   ref?: Ref<LunarEyesHandle>;
 };
 
@@ -50,6 +54,7 @@ export function LunarEyes({
   gaze = "none",
   smile = false,
   feedback = false,
+  wake = false,
   ref,
 }: LunarEyesProps) {
   const reduced = useReducedMotion();
@@ -58,7 +63,8 @@ export function LunarEyes({
   const [visible, setVisible] = useState(false);
   const [celebrating, setCelebrating] = useState(false);
 
-  const lid = useMotionValue(0); // 0 open, 1 closed
+  const lid = useMotionValue(wake ? 1 : 0); // 0 open, 1 closed
+  const [awake, setAwake] = useState(!wake);
   const cheek = useMotionValue<number>(SMILE.hiddenY);
   const hop = useMotionValue(0);
   const pupils = [
@@ -90,8 +96,32 @@ export function LunarEyes({
     [lid],
   );
 
+  // Waking up: the eyes open a moment after they first appear. Reads the motion setting directly,
+  // because the context says "reduced" until the browser has reported the real setting.
+  // Without JavaScript a CSS rule keeps the lids open (globals.css, [data-wake]).
+  useEffect(() => {
+    if (awake) return;
+    const still = readReducedMotion();
+    if (!still && !visible) return;
+    const timer = window.setTimeout(
+      () => {
+        if (still) {
+          lid.jump(0);
+          setAwake(true);
+        } else {
+          animate(lid, 0, { duration: WAKE.openMs / 1000, ease: "easeOut" }).then(() =>
+            setAwake(true),
+          );
+        }
+      },
+      still ? 0 : WAKE.delayMs,
+    );
+    return () => window.clearTimeout(timer);
+  }, [awake, visible, lid]);
+
   // Blinking, double blinks and falling asleep after 5 minutes without interaction.
   useEffect(() => {
+    if (!awake) return;
     if (!blink || reduced || !visible) {
       lid.jump(0); // never leave a lid frozen shut
       return;
@@ -143,7 +173,7 @@ export function LunarEyes({
       for (const e of events) window.removeEventListener(e, onInteraction);
       lid.jump(0);
     };
-  }, [blink, reduced, visible, lid]);
+  }, [awake, blink, reduced, visible, lid]);
 
   // Gaze: the pupils look toward the pointer, anywhere on the page.
   useEffect(() => {
@@ -237,7 +267,8 @@ export function LunarEyes({
       aria-hidden="true"
       focusable="false"
       data-smiling={smiling ? "true" : "false"}
-      data-lid="0.00"
+      data-lid={wake ? "1.00" : "0.00"}
+      data-wake={wake ? "" : undefined}
     >
       <defs>
         {EYE_CENTERS.map((c, i) => (

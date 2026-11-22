@@ -29,6 +29,9 @@ export const GAZE = {
   returnMs: 180,
 } as const;
 
+/** The site's own touch (not in the app): on the home page the eyes open once, like waking up. */
+export const WAKE = { delayMs: 450, openMs: 320 } as const;
+
 export const FEEDBACK = { hover: 1.08, press: 0.92, ms: 110 } as const;
 
 export const SMILE = {

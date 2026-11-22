@@ -7,6 +7,7 @@ import { locale as rootLocale } from "next/root-params";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ReducedMotionProvider } from "@/components/motion/ReducedMotionProvider";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { SITE_URL } from "@/i18n/alternates";
 import { routing } from "@/i18n/routing";
 import { DEFAULT_MOTION, DEFAULT_THEME, PREFERENCE_SCRIPT } from "@/lib/preferences";
@@ -51,7 +52,8 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: PREFERENCE_SCRIPT }} />
+        {/* Extensions sometimes change scripts in <head>; the theme script is fixed text, so ignore that. */}
+        <script suppressHydrationWarning dangerouslySetInnerHTML={{ __html: PREFERENCE_SCRIPT }} />
       </head>
       {/* Browser extensions (e.g. Grammarly) add attributes to <body>; don't treat that as a mismatch. */}
       <body className="flex min-h-full flex-col font-sans" suppressHydrationWarning>
@@ -63,11 +65,13 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
         </a>
         <NextIntlClientProvider>
           <ReducedMotionProvider>
-            <SiteHeader />
-            <main id="main" tabIndex={-1} className="flex flex-1 flex-col pt-24 outline-none">
-              {children}
-            </main>
-            <SiteFooter />
+            <SmoothScroll>
+              <SiteHeader />
+              <main id="main" tabIndex={-1} className="flex flex-1 flex-col pt-24 outline-none">
+                {children}
+              </main>
+              <SiteFooter />
+            </SmoothScroll>
           </ReducedMotionProvider>
         </NextIntlClientProvider>
       </body>

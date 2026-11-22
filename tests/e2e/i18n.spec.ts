@@ -24,7 +24,9 @@ test("/ goes to the English home page", async ({ page }) => {
 test("/id is in Bahasa Indonesia", async ({ page }) => {
   await page.goto("/id");
   await expect(page.locator("html")).toHaveAttribute("lang", "id");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(messages("id").Home.title);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Dynamic Island untuk Windows 11",
+  );
   await expect(page).toHaveTitle(messages("id").Metadata.title);
   await expect(page.getByRole("link", { name: "Langsung ke konten" })).toBeAttached();
 });

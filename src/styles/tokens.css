@@ -26,6 +26,8 @@
   /* Site token: the chosen option of a segmented control. */
   --toggle-on-bg: var(--lunar-surface);
   --toggle-on-text: var(--lunar-text);
+  /* Site token: the soft moonlight behind the hero pill. */
+  --hero-halo: color-mix(in srgb, #f6f7fb 12%, transparent);
   color-scheme: dark;
 }
 
@@ -44,6 +46,7 @@
   --lunar-recording: #c8102e;
   --toggle-on-bg: var(--lunar-text);
   --toggle-on-text: var(--lunar-surface);
+  --hero-halo: color-mix(in srgb, #0b0c10 7%, transparent);
   color-scheme: light;
 }
 
@@ -63,6 +66,7 @@
     --lunar-recording: #c8102e;
     --toggle-on-bg: var(--lunar-text);
     --toggle-on-text: var(--lunar-surface);
+    --hero-halo: color-mix(in srgb, #0b0c10 7%, transparent);
     color-scheme: light;
   }
 }

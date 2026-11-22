@@ -24,6 +24,28 @@
   --font-mono: "Cascadia Code", "Cascadia Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
+/* Lenis (from lenis/dist/lenis.css, which the package doesn't export). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Waking eyes start closed; without JavaScript they would stay closed, so keep them open. */
+@media (scripting: none) {
+  [data-wake] [data-part="lid"] {
+    transform: none !important;
+  }
+}
+
 /* A classic scale (Bringhurst): 12 14 16 18 21 24 30 36 48 60 72. */
 @layer base {
   html {
