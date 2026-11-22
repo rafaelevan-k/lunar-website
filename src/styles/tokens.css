@@ -1,0 +1,56 @@
+/*
+ * Lunar design tokens, copied from docs/DESIGN_TOKENS.md in rafaelevan-k/lunar (v1.1.1).
+ * Dark is the default look. Light applies with data-theme="light", or with the system
+ * light preference when no theme was chosen (data-theme="system" or absent).
+ */
+:root {
+  --lunar-bg: #0b0c10;
+  --lunar-surface: #181a22;
+  --lunar-text: #f6f7fb;
+  --lunar-text-2: #a8adbe;
+  --lunar-text-disabled: #6f7488;
+  --lunar-accent: #b6b2ff;
+  --lunar-on-accent: #0b0c10;
+  --lunar-focus: #b6b2ff;
+  --lunar-border: #3a3e52;
+  --lunar-error: #ff737e;
+  --lunar-success: #86d7b0;
+  --lunar-recording: #ff453a;
+
+  --lunar-radius-panel: 24px;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --lunar-bg: #f6f7fb;
+  --lunar-surface: #ffffff;
+  --lunar-text: #0b0c10;
+  --lunar-text-2: #4a4f63;
+  --lunar-text-disabled: #8a8fa3;
+  --lunar-accent: #4b45c9;
+  --lunar-on-accent: #ffffff;
+  --lunar-focus: #4b45c9;
+  --lunar-border: #d4d7e2;
+  --lunar-error: #b3261e;
+  --lunar-success: #1b7f4b;
+  --lunar-recording: #c8102e;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: light) {
+  :root[data-theme="system"] {
+    --lunar-bg: #f6f7fb;
+    --lunar-surface: #ffffff;
+    --lunar-text: #0b0c10;
+    --lunar-text-2: #4a4f63;
+    --lunar-text-disabled: #8a8fa3;
+    --lunar-accent: #4b45c9;
+    --lunar-on-accent: #ffffff;
+    --lunar-focus: #4b45c9;
+    --lunar-border: #d4d7e2;
+    --lunar-error: #b3261e;
+    --lunar-success: #1b7f4b;
+    --lunar-recording: #c8102e;
+    color-scheme: light;
+  }
+}

@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme inline {
+  --color-lunar-bg: var(--lunar-bg);
+  --color-lunar-surface: var(--lunar-surface);
+  --color-lunar-text: var(--lunar-text);
+  --color-lunar-text-2: var(--lunar-text-2);
+  --color-lunar-text-disabled: var(--lunar-text-disabled);
+  --color-lunar-accent: var(--lunar-accent);
+  --color-lunar-on-accent: var(--lunar-on-accent);
+  --color-lunar-focus: var(--lunar-focus);
+  --color-lunar-border: var(--lunar-border);
+  --color-lunar-error: var(--lunar-error);
+  --color-lunar-success: var(--lunar-success);
+  --color-lunar-recording: var(--lunar-recording);
+  --radius-panel: var(--lunar-radius-panel);
+  --font-sans: var(--font-geist-sans), "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+body {
+  background: var(--lunar-bg);
+  color: var(--lunar-text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--lunar-focus);
+  outline-offset: 2px;
+}
