@@ -144,5 +144,11 @@
       "activitiesTitle": "Saat sesuatu sedang berjalan",
       "activitiesLead": "Pulau yang tertutup menampilkan musik, rekaman, atau timer fokus."
     }
+  },
+  "Download": {
+    "details": "Lunar {version}, {size}, rilis {date}.",
+    "notWindows": "Lunar untuk PC Windows 11. Salin tautannya dan buka di PC Anda.",
+    "copy": "Salin tautan unduhan",
+    "copied": "Tautan disalin"
   }
 }

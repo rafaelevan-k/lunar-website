@@ -144,5 +144,11 @@
       "activitiesTitle": "While something is happening",
       "activitiesLead": "The closed island shows the music, the recording or the focus timer."
     }
+  },
+  "Download": {
+    "details": "Lunar {version}, {size}, released {date}.",
+    "notWindows": "Lunar is for Windows 11 PCs. Copy the link and open it on your PC.",
+    "copy": "Copy download link",
+    "copied": "Link copied"
   }
 }

@@ -3,22 +3,23 @@
 import { useRef, useState } from "react";
 import type { LunarEyesHandle } from "@/components/lunar/LunarEyes";
 import { LunarPill } from "@/components/lunar/LunarPill";
+import { DownloadButton, type DownloadButtonText } from "@/components/ui/DownloadButton";
 
 /*
- * The starter hero until the real one (WEB-09): the pill's eyes follow the pointer, smile while the
+ * The starter hero until the real one: the pill's eyes follow the pointer, smile while the
  * download button is hovered or focused, and celebrate when the pill is clicked.
  */
 export function StarterHero({
   title,
   lead,
-  download,
   downloadHref,
+  downloadText,
   pillAction,
 }: {
   title: string;
   lead: string;
-  download: string;
   downloadHref: string;
+  downloadText: DownloadButtonText;
   pillAction: string;
 }) {
   const eyes = useRef<LunarEyesHandle>(null);
@@ -36,16 +37,7 @@ export function StarterHero({
         {title}
       </h1>
       <p className="max-w-xl text-lg text-lunar-text-2">{lead}</p>
-      <a
-        href={downloadHref}
-        onPointerEnter={() => setEager(true)}
-        onPointerLeave={() => setEager(false)}
-        onFocus={() => setEager(true)}
-        onBlur={() => setEager(false)}
-        className="flex min-h-12 items-center rounded-full bg-lunar-accent px-6 font-medium text-lunar-on-accent"
-      >
-        {download}
-      </a>
+      <DownloadButton href={downloadHref} text={downloadText} onIntent={setEager} />
     </div>
   );
 }

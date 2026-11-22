@@ -52,3 +52,6 @@ next-env.d.ts
 /PRD.md
 /docs/
 /.claude/
+
+# release data fetched at build time
+/src/content/release.generated.json
