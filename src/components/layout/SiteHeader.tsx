@@ -2,12 +2,13 @@
 
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { LunarEyes } from "@/components/lunar/LunarEyes";
+import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LATEST_RELEASE_URL, NAV_LINKS } from "@/content/site";
+import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { fade, islandSpring } from "@/lib/motion";
 
@@ -22,6 +23,9 @@ const OPEN_RADIUS = 24;
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const t = useTranslations("Nav");
+  const common = useTranslations("Common");
+  const theme = useTranslations("Theme");
   const islandRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -80,6 +84,7 @@ export function SiteHeader() {
         <motion.div layout="position" className="flex h-14 items-center gap-1 pr-1.5 pl-4">
           <Link
             href="/"
+            aria-label={common("lunarHome")}
             onClick={() => setOpen(false)}
             className="mr-auto flex h-11 items-center gap-2.5 rounded-full pr-3"
           >
@@ -87,21 +92,22 @@ export function SiteHeader() {
             <span className="font-display text-lg font-semibold tracking-tight">Lunar</span>
           </Link>
 
-          <nav aria-label="Main" className="hidden md:block">
+          <nav aria-label={t("label")} className="hidden md:block">
             <ul className="flex items-center">
-              {NAV_LINKS.map(({ href, label }) => (
-                <li key={href}>{navLink(href, label)}</li>
+              {NAV_LINKS.map(({ href, key }) => (
+                <li key={href}>{navLink(href, t(key))}</li>
               ))}
             </ul>
           </nav>
 
+          <LocaleSwitcher variant="compact" className="hidden md:grid" />
           <ThemeToggle className="hidden md:grid" />
 
           <a
             href={LATEST_RELEASE_URL}
             className="ml-1 flex h-11 items-center rounded-full bg-lunar-accent px-5 text-sm font-medium text-lunar-on-accent transition-[filter] hover:brightness-110"
           >
-            Download
+            {common("download")}
           </a>
 
           <button
@@ -110,7 +116,7 @@ export function SiteHeader() {
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
             aria-controls="site-menu"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? t("closeMenu") : t("openMenu")}
             className="grid size-11 place-items-center rounded-full text-lunar-text-2 hover:text-lunar-text md:hidden"
           >
             {open ? (
@@ -125,22 +131,23 @@ export function SiteHeader() {
           {open && (
             <motion.nav
               id="site-menu"
-              aria-label="Main"
+              aria-label={t("label")}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { ...fade, delay: 0.08 } }}
               exit={{ opacity: 0, transition: { duration: 0.08 } }}
               className="px-5 pt-2 pb-5 md:hidden"
             >
               <ul className="flex flex-col">
-                <li>{navLink("/", "Home", true)}</li>
-                {NAV_LINKS.map(({ href, label }) => (
-                  <li key={href}>{navLink(href, label, true)}</li>
+                <li>{navLink("/", t("home"), true)}</li>
+                {NAV_LINKS.map(({ href, key }) => (
+                  <li key={href}>{navLink(href, t(key), true)}</li>
                 ))}
               </ul>
               <div className="mt-4 flex items-center justify-between border-t border-lunar-border pt-3">
-                <span className="text-sm text-lunar-text-2">Theme</span>
+                <span className="text-sm text-lunar-text-2">{theme("legend")}</span>
                 <ThemeToggle />
               </div>
+              <LocaleSwitcher variant="list" className="mt-3" />
             </motion.nav>
           )}
         </AnimatePresence>

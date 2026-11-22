@@ -1,0 +1,55 @@
+{
+  "Metadata": {
+    "title": "Lunar — A Dynamic Island for Windows 11",
+    "description": "Lunar is a small pill at the top of your screen with a pair of eyes that watch over your desktop. Free, open source, private."
+  },
+  "Common": {
+    "skipToContent": "Skip to content",
+    "download": "Download",
+    "lunarHome": "Lunar home",
+    "tagline": "A Dynamic Island for Windows 11, with a pair of eyes that watch over your desktop."
+  },
+  "Nav": {
+    "label": "Main",
+    "home": "Home",
+    "features": "Features",
+    "privacy": "Privacy",
+    "changelog": "Changelog",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Theme": {
+    "legend": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System",
+    "switchToLight": "Switch to light theme",
+    "switchToDark": "Switch to dark theme"
+  },
+  "Motion": {
+    "legend": "Motion",
+    "system": "System",
+    "reduce": "Reduced",
+    "full": "Full"
+  },
+  "Language": {
+    "label": "Language",
+    "en": "English",
+    "id": "Bahasa Indonesia"
+  },
+  "Footer": {
+    "onThisSite": "On this site",
+    "onGitHub": "On GitHub",
+    "latestRelease": "Latest release",
+    "sourceCode": "Source code",
+    "privacyNotice": "Full privacy notice",
+    "copyright": "© 2026 Rafael Evan Kristanto. Lunar is free and open source under the Apache License 2.0.",
+    "notAffiliated": "Not affiliated with Apple or Anthropic."
+  },
+  "Home": {
+    "title": "Lunar, a Dynamic Island for Windows 11",
+    "lead": "With a pair of eyes that watch over your desktop. The full site is on its way.",
+    "download": "Download Lunar for Windows 11",
+    "pillLabel": "Lunar"
+  }
+}

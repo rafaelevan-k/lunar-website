@@ -1,0 +1,55 @@
+{
+  "Metadata": {
+    "title": "Lunar — Dynamic Island untuk Windows 11",
+    "description": "Lunar adalah pulau kecil di bagian atas layar dengan sepasang mata yang mengawasi desktop Anda. Gratis, open source, dan privat."
+  },
+  "Common": {
+    "skipToContent": "Langsung ke konten",
+    "download": "Unduh",
+    "lunarHome": "Beranda Lunar",
+    "tagline": "Dynamic Island untuk Windows 11, dengan sepasang mata yang mengawasi desktop Anda."
+  },
+  "Nav": {
+    "label": "Utama",
+    "home": "Beranda",
+    "features": "Fitur",
+    "privacy": "Privasi",
+    "changelog": "Riwayat versi",
+    "openMenu": "Buka menu",
+    "closeMenu": "Tutup menu"
+  },
+  "Theme": {
+    "legend": "Tema",
+    "dark": "Gelap",
+    "light": "Terang",
+    "system": "Sistem",
+    "switchToLight": "Ganti ke tema terang",
+    "switchToDark": "Ganti ke tema gelap"
+  },
+  "Motion": {
+    "legend": "Gerakan",
+    "system": "Sistem",
+    "reduce": "Dikurangi",
+    "full": "Penuh"
+  },
+  "Language": {
+    "label": "Bahasa",
+    "en": "English",
+    "id": "Bahasa Indonesia"
+  },
+  "Footer": {
+    "onThisSite": "Di situs ini",
+    "onGitHub": "Di GitHub",
+    "latestRelease": "Rilis terbaru",
+    "sourceCode": "Kode sumber",
+    "privacyNotice": "Pemberitahuan privasi lengkap",
+    "copyright": "© 2026 Rafael Evan Kristanto. Lunar gratis dan open source dengan Apache License 2.0.",
+    "notAffiliated": "Tidak berafiliasi dengan Apple atau Anthropic."
+  },
+  "Home": {
+    "title": "Lunar, Dynamic Island untuk Windows 11",
+    "lead": "Dengan sepasang mata yang mengawasi desktop Anda. Situs lengkapnya segera hadir.",
+    "download": "Unduh Lunar untuk Windows 11",
+    "pillLabel": "Lunar"
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useId, useSyncExternalStore } from "react";
 import {
   DEFAULT_MOTION,
@@ -15,17 +16,8 @@ import {
 
 type Option<T extends string> = { value: T; label: string };
 
-const THEME_OPTIONS: Option<Theme>[] = [
-  { value: "dark", label: "Dark" },
-  { value: "light", label: "Light" },
-  { value: "system", label: "System" },
-];
-
-const MOTION_OPTIONS: Option<Motion>[] = [
-  { value: "system", label: "System" },
-  { value: "reduce", label: "Reduced" },
-  { value: "full", label: "Full" },
-];
+const THEME_ORDER: Theme[] = ["dark", "light", "system"];
+const MOTION_ORDER: Motion[] = ["system", "reduce", "full"];
 
 function Segmented<T extends string>({
   legend,
@@ -67,11 +59,25 @@ function Segmented<T extends string>({
 export function DisplayPreferences() {
   const theme = useSyncExternalStore(subscribePreferences, readTheme, () => DEFAULT_THEME);
   const motion = useSyncExternalStore(subscribePreferences, readMotion, () => DEFAULT_MOTION);
+  const themeText = useTranslations("Theme");
+  const motionText = useTranslations("Motion");
+  const themeOptions = THEME_ORDER.map((value) => ({ value, label: themeText(value) }));
+  const motionOptions = MOTION_ORDER.map((value) => ({ value, label: motionText(value) }));
 
   return (
     <div className="flex flex-col gap-3">
-      <Segmented legend="Theme" options={THEME_OPTIONS} value={theme} onChange={setTheme} />
-      <Segmented legend="Motion" options={MOTION_OPTIONS} value={motion} onChange={setMotion} />
+      <Segmented
+        legend={themeText("legend")}
+        options={themeOptions}
+        value={theme}
+        onChange={setTheme}
+      />
+      <Segmented
+        legend={motionText("legend")}
+        options={motionOptions}
+        value={motion}
+        onChange={setMotion}
+      />
     </div>
   );
 }

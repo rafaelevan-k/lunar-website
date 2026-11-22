@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   // Dev only: lets the dev server be opened at 127.0.0.1 as well as localhost.
@@ -13,6 +14,10 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // English is the default language. No guessing from the browser: "/" always goes to /en.
+  async redirects() {
+    return [{ source: "/", destination: "/en", permanent: false }];
+  },
 };
 
-export default nextConfig;
+export default createNextIntlPlugin("./src/i18n/request.ts")(nextConfig);
