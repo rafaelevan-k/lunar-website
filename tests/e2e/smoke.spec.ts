@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 
 test("home shows the Lunar pill and a download link", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("img", { name: "Lunar" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Make Lunar smile" })).toBeVisible();
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await expect(page.getByRole("link", { name: /download lunar/i })).toHaveAttribute(
     "href",
