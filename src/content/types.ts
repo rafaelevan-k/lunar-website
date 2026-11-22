@@ -13,6 +13,22 @@ export type Source = string;
 
 export type Item = { title: string; body: string; source: Source };
 
+/** What each "Why Lunar" card shows on its 3D island. */
+export type WhyId =
+  | "personality"
+  | "invisible"
+  | "focus"
+  | "recorder"
+  | "activity"
+  | "style"
+  | "translate"
+  | "private"
+  | "light"
+  | "updates"
+  | "everyone";
+
+export type WhyItem = Item & { id: WhyId };
+
 export type PageItem = {
   id: "system" | "media" | "pomodoro" | "converter" | "notes" | "usage";
   name: string;
@@ -36,7 +52,7 @@ export type SiteContent = {
     facts: string[];
     source: Source;
   };
-  why: Item[];
+  why: WhyItem[];
   pages: PageItem[];
   whatsNew: { version: string; items: Item[] };
   privacy: {

@@ -17,56 +17,67 @@ export const id = {
 
   why: [
     {
+      id: "personality",
       title: "Punya kepribadian",
       body: "Bukan toolbar biasa: Lunar adalah sepasang mata yang berkedip, melirik, dan tersenyum saat ada kabar baik. Terasa hidup tanpa pernah mengganggu.",
       source: "README.md Why Lunar: It has a personality",
     },
     {
+      id: "invisible",
       title: "Tak terlihat saat berbagi layar",
       body: "Semua jendela Lunar tidak ikut terbagi di Teams, Zoom, dan Meet, serta tidak masuk ke screenshot dan rekaman layar. Anda melihat kontrol, catatan, dan timer Anda; penonton tidak.",
       source: "README.md Why Lunar: Invisible in screen shares",
     },
     {
+      id: "focus",
       title: "Mode fokus yang benar-benar fokus",
       body: "Mulai sesi Pomodoro dan Lunar menyalakan Jangan Ganggu di Windows untuk Anda. Dimatikan saat Anda jeda, dan dikembalikan seperti semula saat selesai.",
       source: "README.md Why Lunar: Focus mode",
     },
     {
+      id: "recorder",
       title: "Perekam di dalam pulau",
       body: "Tekan Rekam lalu tutup pulaunya. Pulau menampilkan garis suara merah, waktu, serta tombol Jeda dan Berhenti. Rekaman disimpan sebagai file MP3 biasa.",
       source: "README.md Why Lunar: A recorder that lives in the island",
     },
     {
+      id: "activity",
       title: "Pulau menunjukkan apa yang terjadi",
       body: "Saat musik diputar, pulau yang tertutup menampilkan gambar lagu dan bar suara yang bergerak mengikuti apa yang Anda dengar. Saat merekam atau fokus, pulau berubah menjadi perekam atau hitungan mundur.",
       source: "README.md Why Lunar: The island shows what's happening",
     },
     {
+      id: "style",
       title: "Pill atau Notch",
       body: "Pakai pill yang mengambang, atau ganti ke Notch yang menempel di tepi atas layar dan terbuka menjadi panel lebar dengan halaman sebagai tab.",
       source: "README.md Why Lunar: Pill or Notch",
     },
     {
+      id: "translate",
       title: "Terjemahkan layar di tempat",
       body: "Tekan Ctrl+Alt+T dan Lunar membaca teks di layar lalu menampilkannya dalam bahasa Inggris, Indonesia, atau Jepang, tepat di atas teks aslinya. Layar dibaca di PC Anda dan hanya teksnya yang dikirim, dengan kunci Microsoft Azure gratis milik Anda, setelah Anda mengizinkan sekali.",
       source: "README.md Why Lunar: Translate your screen in place",
     },
     {
+      id: "private",
       title: "Privat sejak awal",
       body: "File, catatan, dan rekaman Anda tidak pernah meninggalkan PC. Tidak ada akun Lunar dan tidak ada telemetri. Log tidak pernah berisi nama file, isi catatan, audio, atau apa yang Anda dengarkan.",
       source: "README.md Why Lunar: Private by design",
     },
     {
+      id: "light",
       title: "Ringan sekali",
       body: "Saat diam, Lunar memakai sekitar 0,04 % CPU dan sekitar 95 MB memori pribadi, diukur selama lima menit di laptop biasa.",
       source: "README.md Why Lunar: Light as a feather",
     },
     {
+      id: "updates",
       title: "Memperbarui diri, dengan aman",
       body: "Saat ada versi baru, Lunar bertanya: Instal sekarang atau Nanti. Lunar hanya memasang unduhan yang sidik jarinya cocok dengan rilis resmi. Pengecekan ini bisa dimatikan.",
       source: "README.md Why Lunar: Keeps itself up to date",
     },
     {
+      id: "everyone",
       title: "Untuk semua orang",
       body: "Dukungan keyboard penuh, nama untuk pembaca layar, tema Kontras Tinggi, dan gerakan yang dikurangi. Tema gelap dan terang. Bahasa Inggris dan Bahasa Indonesia.",
       source: "README.md Why Lunar: Made for everyone",

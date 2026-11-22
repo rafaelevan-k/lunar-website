@@ -10,7 +10,7 @@ import {
   useTransform,
 } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { CollapsedIsland } from "@/components/lunar/island/CollapsedIsland";
 import {
   notchBottomRadius,
@@ -35,6 +35,8 @@ import { cn } from "@/lib/cn";
 type Page = { id: string; name: string; body: string };
 
 const PAGES = 6;
+/** Room kept for the fixed header island at the top of the screen, in px. */
+const HEADER_SPACE = 80;
 /** The first part of the scroll opens the island; the rest walks through the pages. */
 const OPEN_END = 0.12;
 
@@ -187,6 +189,29 @@ function PinnedTour({ title, pages, islandStyle, setIslandStyle }: TourProps) {
   const t = useTranslations("Island.tour");
   const section = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
+  const pinned = useRef<HTMLDivElement>(null);
+  const [stickyTop, setStickyTop] = useState(HEADER_SPACE);
+
+  // Centre the pinned content in the space under the header; never higher than the header allows.
+  useEffect(() => {
+    const el = pinned.current;
+    if (!el) return;
+    const update = () =>
+      setStickyTop(
+        Math.max(
+          HEADER_SPACE,
+          HEADER_SPACE + (window.innerHeight - HEADER_SPACE - el.offsetHeight) / 2,
+        ),
+      );
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    window.addEventListener("resize", update);
+    update();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
   const [index, setIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
@@ -228,10 +253,10 @@ function PinnedTour({ title, pages, islandStyle, setIslandStyle }: TourProps) {
         <Intro title={title} islandStyle={islandStyle} setIslandStyle={setIslandStyle} />
       </div>
       <div ref={section} className="relative h-[400svh]" data-tour-pin>
-        {/* Sticks 5rem down, clear of the header, and is only as tall as its content: a full-height box
-            left large empty gaps above (content centred) or below it (content at the top) on tall screens.
-            The scroll distance comes from the 400svh parent, so the motion is unchanged. */}
-        <div className="sticky top-20 pt-6 pb-6">
+        {/* Only as tall as its content, so there is no empty gap before or after it. While pinned it
+            sticks where its content is centred in the space below the header (top is measured). The
+            scroll distance comes from the 400svh parent, so the motion is unchanged. */}
+        <div ref={pinned} className="sticky pt-6 pb-6" style={{ top: stickyTop }}>
           {/* minmax(0, …) lets the panel scale down instead of widening the column. */}
           <div className="mx-auto grid w-full max-w-6xl grid-cols-[minmax(0,1fr)] items-start gap-6 px-4 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-14">
             <div className="order-2 md:order-1">

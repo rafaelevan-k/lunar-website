@@ -44,7 +44,7 @@ export function LocaleSwitcher({
 
   return (
     <div className={cn("flex flex-wrap items-center gap-x-4 gap-y-2", className)}>
-      <span className="w-16 text-sm text-lunar-text-2">{t("label")}</span>
+      <span className="w-24 shrink-0 text-sm text-lunar-text-2">{t("label")}</span>
       <ul className="flex rounded-full border border-lunar-border p-1">
         {routing.locales.map((l) => {
           const current = l === locale;

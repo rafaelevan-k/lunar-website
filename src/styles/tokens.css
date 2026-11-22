@@ -28,6 +28,10 @@
   --toggle-on-text: var(--lunar-text);
   /* Site token: the soft moonlight behind the hero pill. */
   --hero-halo: color-mix(in srgb, #f6f7fb 12%, transparent);
+  /* Site token: the text part of the Why Lunar cards (dark theme: the island's surface). */
+  --why-card-bg: #181a22;
+  --why-card-border: #3a3e52;
+  --why-card-text-2: #a8adbe;
   color-scheme: dark;
 }
 
@@ -47,6 +51,10 @@
   --toggle-on-bg: var(--lunar-text);
   --toggle-on-text: var(--lunar-surface);
   --hero-halo: color-mix(in srgb, #0b0c10 7%, transparent);
+  /* A softer dusk slate in light mode, matching the wallpaper above it (secondary text 5.2:1). */
+  --why-card-bg: #525878;
+  --why-card-border: transparent;
+  --why-card-text-2: #dcdfe8;
   color-scheme: light;
 }
 
@@ -67,6 +75,10 @@
     --toggle-on-bg: var(--lunar-text);
     --toggle-on-text: var(--lunar-surface);
     --hero-halo: color-mix(in srgb, #0b0c10 7%, transparent);
+    /* A softer dusk slate in light mode, matching the wallpaper above it (secondary text 5.2:1). */
+    --why-card-bg: #525878;
+    --why-card-border: transparent;
+    --why-card-text-2: #dcdfe8;
     color-scheme: light;
   }
 }

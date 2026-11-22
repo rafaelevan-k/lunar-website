@@ -33,7 +33,12 @@ function Segmented<T extends string>({
   const name = useId();
   return (
     <fieldset className="flex flex-wrap items-center gap-x-4 gap-y-2">
-      <legend className="float-left mr-4 w-16 text-sm text-lunar-text-2">{legend}</legend>
+      {/* The legend names the group for screen readers; the visible label is a fixed-width column so
+          Theme, Motion and Language line up. */}
+      <legend className="sr-only">{legend}</legend>
+      <span aria-hidden="true" className="w-24 shrink-0 text-sm text-lunar-text-2">
+        {legend}
+      </span>
       <div className="flex rounded-full border border-lunar-border p-1">
         {options.map((option) => (
           <label

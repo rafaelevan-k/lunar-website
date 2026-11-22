@@ -17,56 +17,67 @@ export const en = {
 
   why: [
     {
+      id: "personality",
       title: "It has a personality",
       body: "Instead of another toolbar, Lunar is a pair of eyes that blink, look around and smile when something good happens. It feels alive without ever getting in the way.",
       source: "README.md Why Lunar: It has a personality",
     },
     {
+      id: "invisible",
       title: "Invisible in screen shares",
       body: "Every Lunar window is left out of Teams, Zoom and Meet screen sharing, screenshots and recordings. You see your controls, notes and timer; your audience never does.",
       source: "README.md Why Lunar: Invisible in screen shares",
     },
     {
+      id: "focus",
       title: "Focus mode that really focuses",
       body: "Start a Pomodoro session and Lunar turns on Windows Do Not Disturb for you. It turns it off while you pause, and puts everything back as it was when you finish.",
       source: "README.md Why Lunar: Focus mode",
     },
     {
+      id: "recorder",
       title: "A recorder in the island",
       body: "Press Record and close the island. It shows live red sound lines, the time, and Pause and Stop. Your recordings are saved as ordinary MP3 files.",
       source: "README.md Why Lunar: A recorder that lives in the island",
     },
     {
+      id: "activity",
       title: "The island shows what's happening",
       body: "While music plays, the closed island shows the track's picture and sound bars that move with what you hear. While you record or focus, it turns into a recorder or a countdown.",
       source: "README.md Why Lunar: The island shows what's happening",
     },
     {
+      id: "style",
       title: "Pill or Notch",
       body: "Keep the floating pill, or switch to a Notch that sits against the top edge of the screen and opens into a wide panel with the pages as tabs.",
       source: "README.md Why Lunar: Pill or Notch",
     },
     {
+      id: "translate",
       title: "Translate your screen in place",
       body: "Press Ctrl+Alt+T and Lunar reads the text on your screen and shows it in English, Indonesian or Japanese, right over the original. It reads the screen on your PC and sends only the text, with your own free Microsoft Azure key, after you allow it once.",
       source: "README.md Why Lunar: Translate your screen in place",
     },
     {
+      id: "private",
       title: "Private by design",
       body: "Your files, notes and recordings never leave your PC. There is no Lunar account and no telemetry. Logs never contain file names, note text, audio or what you listen to.",
       source: "README.md Why Lunar: Private by design",
     },
     {
+      id: "light",
       title: "Light as a feather",
       body: "Sitting idle, Lunar uses about 0.04 % CPU and about 95 MB of private memory, measured over five minutes on a typical laptop.",
       source: "README.md Why Lunar: Light as a feather",
     },
     {
+      id: "updates",
       title: "Keeps itself up to date, safely",
       body: "When a new version comes out, Lunar asks: Install now or Later. It installs only a download whose fingerprint matches the official release. You can turn the check off.",
       source: "README.md Why Lunar: Keeps itself up to date",
     },
     {
+      id: "everyone",
       title: "Made for everyone",
       body: "Full keyboard support, screen-reader names, a High Contrast theme and reduced motion. Dark and light themes. English and Bahasa Indonesia.",
       source: "README.md Why Lunar: Made for everyone",

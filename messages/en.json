@@ -153,5 +153,10 @@
     "notWindows": "Lunar is for Windows 11 PCs. Copy the link and open it on your PC.",
     "copy": "Copy download link",
     "copied": "Link copied"
+  },
+  "Why": {
+    "title": "Why Lunar",
+    "open": "More about {title}",
+    "close": "Close"
   }
 }

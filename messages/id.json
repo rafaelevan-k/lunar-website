@@ -153,5 +153,10 @@
     "notWindows": "Lunar untuk PC Windows 11. Salin tautannya dan buka di PC Anda.",
     "copy": "Salin tautan unduhan",
     "copied": "Tautan disalin"
+  },
+  "Why": {
+    "title": "Kenapa Lunar",
+    "open": "Selengkapnya tentang {title}",
+    "close": "Tutup"
   }
 }
