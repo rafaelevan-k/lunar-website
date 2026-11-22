@@ -18,6 +18,10 @@
   --lunar-recording: #ff453a;
 
   --lunar-radius-panel: 24px;
+
+  /* Site token: the chosen option of a segmented control. */
+  --toggle-on-bg: var(--lunar-surface);
+  --toggle-on-text: var(--lunar-text);
   color-scheme: dark;
 }
 
@@ -34,6 +38,8 @@
   --lunar-error: #b3261e;
   --lunar-success: #1b7f4b;
   --lunar-recording: #c8102e;
+  --toggle-on-bg: var(--lunar-text);
+  --toggle-on-text: var(--lunar-surface);
   color-scheme: light;
 }
 
@@ -51,6 +57,31 @@
     --lunar-error: #b3261e;
     --lunar-success: #1b7f4b;
     --lunar-recording: #c8102e;
+    --toggle-on-bg: var(--lunar-text);
+    --toggle-on-text: var(--lunar-surface);
     color-scheme: light;
   }
+}
+
+/*
+ * The island (pill, eyes, header) always keeps Lunar's dark look, in both site themes, so the eyes
+ * read the same everywhere: white eyes with dark pupils on a dark stadium. Owner decision, 2026-11-23.
+ */
+.lunar-island {
+  --lunar-bg: #0b0c10;
+  --lunar-surface: #181a22;
+  --lunar-text: #f6f7fb;
+  --lunar-text-2: #a8adbe;
+  --lunar-text-disabled: #6f7488;
+  --lunar-accent: #b6b2ff;
+  --lunar-on-accent: #0b0c10;
+  --lunar-focus: #b6b2ff;
+  --lunar-border: #3a3e52;
+  --lunar-error: #ff737e;
+  --lunar-success: #86d7b0;
+  --lunar-recording: #ff453a;
+  --toggle-on-bg: var(--lunar-surface);
+  --toggle-on-text: var(--lunar-text);
+  color: var(--lunar-text);
+  color-scheme: dark;
 }

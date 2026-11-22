@@ -15,16 +15,66 @@
   --color-lunar-success: var(--lunar-success);
   --color-lunar-recording: var(--lunar-recording);
   --radius-panel: var(--lunar-radius-panel);
-  --font-sans: var(--font-geist-sans), "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Body: the Lunar app's own typeface where the visitor has it (Windows), the system face elsewhere. */
+  --font-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* Headings: Bricolage Grotesque, soft and a little quirky, like the eyes. */
+  --font-display:
+    var(--font-bricolage), "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Cascadia Code", "Cascadia Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
-body {
-  background: var(--lunar-bg);
-  color: var(--lunar-text);
+/* A classic scale (Bringhurst): 12 14 16 18 21 24 30 36 48 60 72. */
+@layer base {
+  html {
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background: var(--lunar-bg);
+    color: var(--lunar-text);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--lunar-accent) 35%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--lunar-focus);
+    outline-offset: 2px;
+  }
 }
 
-:focus-visible {
-  outline: 2px solid var(--lunar-focus);
-  outline-offset: 2px;
+/* Less motion: when the visitor picks Reduced, or picks System and the system asks for it. */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-motion="system"] *,
+  :root[data-motion="system"] *::before,
+  :root[data-motion="system"] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root[data-motion="reduce"] *,
+:root[data-motion="reduce"] *::before,
+:root[data-motion="reduce"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }

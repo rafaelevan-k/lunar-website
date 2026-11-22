@@ -23,11 +23,15 @@ test("home makes no request to another origin", async ({ page, baseURL }) => {
   expect(foreign).toEqual([]);
 });
 
-test("home has no serious accessibility violations", async ({ page }) => {
-  await page.goto("/");
-  const results = await new AxeBuilder({ page }).analyze();
-  const serious = results.violations.filter(
-    (v) => v.impact === "serious" || v.impact === "critical",
-  );
-  expect(serious).toEqual([]);
-});
+for (const theme of ["dark", "light"] as const) {
+  test(`home has no serious accessibility violations (${theme})`, async ({ page }) => {
+    await page.addInitScript((value) => localStorage.setItem("lunar-theme", value), theme);
+    await page.goto("/");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+    const results = await new AxeBuilder({ page }).analyze();
+    const serious = results.violations.filter(
+      (v) => v.impact === "serious" || v.impact === "critical",
+    );
+    expect(serious).toEqual([]);
+  });
+}
