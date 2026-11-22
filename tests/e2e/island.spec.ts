@@ -51,14 +51,15 @@ test.describe("island preview", () => {
         .evaluateAll((els) =>
           els.map((el) => [el.getAttribute("data-activity"), el.clientWidth, el.clientHeight]),
         );
-    expect(await sizes()).toEqual([
+    // Polled: right after the page loads the elements can still report 0 while layout settles.
+    await expect.poll(sizes).toEqual([
       ["eyes", 160, 44],
       ["media", 160, 44],
       ["recording", 232, 44],
       ["focus", 160, 44],
     ]);
     await page.getByRole("group", { name: "Island style" }).getByText("Notch").click();
-    expect(await sizes()).toEqual([
+    await expect.poll(sizes).toEqual([
       ["eyes", 230, 32],
       ["media", 280, 32],
       ["recording", 300, 32],

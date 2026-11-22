@@ -15,6 +15,9 @@ test.describe("Lunar's eyes", () => {
 
   test("the pupils look toward the pointer", async ({ page }) => {
     await page.goto("/en");
+    // The hero eyes open once the page is hydrated and they are on screen; only then is the
+    // pointer followed.
+    await expect(heroEyes(page)).toHaveAttribute("data-lid", "0.00");
     const box = (await page.getByRole("button", { name: "Make Lunar smile" }).boundingBox())!;
     await page.mouse.move(box.x + box.width + 300, box.y + box.height / 2);
     await expect.poll(() => pupilX(page)).toBeGreaterThan(3);
