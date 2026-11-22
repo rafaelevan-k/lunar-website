@@ -51,5 +51,98 @@
     "lead": "Dengan sepasang mata yang mengawasi desktop Anda. Situs lengkapnya segera hadir.",
     "download": "Unduh Lunar untuk Windows 11",
     "pillAction": "Buat Lunar tersenyum"
+  },
+  "Island": {
+    "pagesLabel": "Halaman",
+    "previous": "Halaman sebelumnya",
+    "next": "Halaman berikutnya",
+    "pageOf": "{name}, halaman {n} dari {total}",
+    "styleLegend": "Gaya pulau",
+    "pill": "Pill",
+    "notch": "Notch",
+    "pages": {
+      "system": {
+        "name": "Sistem",
+        "summary": "Jam, volume dan kecerahan, Wi-Fi dan Bluetooth, serta tombol Terjemahkan"
+      },
+      "media": {
+        "name": "Media",
+        "summary": "Apa yang diputar di aplikasi mana pun, dengan putar, jeda, sebelumnya, berikutnya, dan penggeseran posisi"
+      },
+      "pomodoro": {
+        "name": "Pomodoro",
+        "summary": "Timer fokus 1 sampai 180 menit yang menyalakan Jangan Ganggu"
+      },
+      "converter": {
+        "name": "Pengonversi berkas",
+        "summary": "Konversi PNG, JPG, dan PDF, atau ubah gambar menjadi dokumen Word, tanpa internet"
+      },
+      "notes": {
+        "name": "Catatan",
+        "summary": "Catatan cepat yang tersimpan saat Anda mengetik, dan perekam suara"
+      },
+      "usage": {
+        "name": "Pemakaian",
+        "summary": "Batas 5 jam dan mingguan Claude Anda, mati sampai Anda menyalakannya"
+      }
+    },
+    "system": {
+      "volume": "Volume",
+      "brightness": "Kecerahan",
+      "translate": "Terjemahkan layar",
+      "wifi": "Wi-Fi",
+      "bluetooth": "Bluetooth",
+      "connected": "Terhubung",
+      "onNotConnected": "Hidup, tidak terhubung"
+    },
+    "media": {
+      "title": "Moonlit Avenue",
+      "artist": "Lena Ray",
+      "source": "Pemutar Media",
+      "playing": "Diputar",
+      "sourceLine": "{source} · {status}"
+    },
+    "pomodoro": {
+      "start": "Mulai",
+      "less": "Lebih singkat",
+      "more": "Lebih lama",
+      "hint": "Memulai juga menyalakan Jangan Ganggu sampai waktunya habis."
+    },
+    "converter": {
+      "drop": "Letakkan berkas di sini",
+      "add": "Tambah berkas",
+      "hint": "Gambar dan PDF, dikonversi di PC ini"
+    },
+    "notes": {
+      "notesTab": "Catatan",
+      "recordsTab": "Rekaman",
+      "newNote": "Catatan baru",
+      "noteOne": "Belanja: beras, telur, kopi",
+      "noteTwo": "Ide untuk akhir pekan",
+      "today": "Hari ini",
+      "yesterday": "Kemarin",
+      "count": "2 catatan"
+    },
+    "usage": {
+      "refresh": "Segarkan",
+      "fiveHour": "Batas 5 jam",
+      "weekly": "Batas mingguan",
+      "percent": "{n}% terpakai",
+      "resetFive": "Reset dalam 2 j 10 mnt",
+      "resetWeek": "Reset dalam 3 h 4 j"
+    },
+    "activity": {
+      "media": "Musik diputar",
+      "recording": "Perekam suara",
+      "focus": "Timer fokus",
+      "pause": "Jeda rekaman",
+      "stop": "Hentikan dan simpan rekaman"
+    },
+    "preview": {
+      "title": "Kenali pulaunya",
+      "lead": "Klik sebuah halaman, pakai panah, atau ganti gayanya. Semuanya digambar ulang dari panel Lunar sendiri.",
+      "activitiesTitle": "Saat sesuatu sedang berjalan",
+      "activitiesLead": "Pulau yang tertutup menampilkan musik, rekaman, atau timer fokus."
+    }
   }
 }

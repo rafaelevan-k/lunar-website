@@ -51,5 +51,98 @@
     "lead": "With a pair of eyes that watch over your desktop. The full site is on its way.",
     "download": "Download Lunar for Windows 11",
     "pillAction": "Make Lunar smile"
+  },
+  "Island": {
+    "pagesLabel": "Pages",
+    "previous": "Previous page",
+    "next": "Next page",
+    "pageOf": "{name}, page {n} of {total}",
+    "styleLegend": "Island style",
+    "pill": "Pill",
+    "notch": "Notch",
+    "pages": {
+      "system": {
+        "name": "System",
+        "summary": "Clock, volume and brightness, Wi-Fi and Bluetooth, and the Translate button"
+      },
+      "media": {
+        "name": "Media",
+        "summary": "What's playing in any app, with play, pause, previous, next and seeking"
+      },
+      "pomodoro": {
+        "name": "Pomodoro",
+        "summary": "A focus timer from 1 to 180 minutes that turns on Do Not Disturb"
+      },
+      "converter": {
+        "name": "File converter",
+        "summary": "Convert PNG, JPG and PDF, or turn pictures into a Word document, offline"
+      },
+      "notes": {
+        "name": "Notes",
+        "summary": "Quick notes that save as you type, and the voice recorder"
+      },
+      "usage": {
+        "name": "Usage",
+        "summary": "Your Claude 5-hour and weekly limits, off until you turn it on"
+      }
+    },
+    "system": {
+      "volume": "Volume",
+      "brightness": "Brightness",
+      "translate": "Translate the screen",
+      "wifi": "Wi-Fi",
+      "bluetooth": "Bluetooth",
+      "connected": "Connected",
+      "onNotConnected": "On, not connected"
+    },
+    "media": {
+      "title": "Moonlit Avenue",
+      "artist": "Lena Ray",
+      "source": "Media Player",
+      "playing": "Playing",
+      "sourceLine": "{source} · {status}"
+    },
+    "pomodoro": {
+      "start": "Start",
+      "less": "Shorter",
+      "more": "Longer",
+      "hint": "Starting also turns on Do Not Disturb until the time is up."
+    },
+    "converter": {
+      "drop": "Drop files here",
+      "add": "Add files",
+      "hint": "Pictures and PDFs, converted on this PC"
+    },
+    "notes": {
+      "notesTab": "Notes",
+      "recordsTab": "Records",
+      "newNote": "New note",
+      "noteOne": "Groceries: rice, eggs, coffee",
+      "noteTwo": "Ideas for the weekend",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "count": "2 notes"
+    },
+    "usage": {
+      "refresh": "Refresh",
+      "fiveHour": "5-hour limit",
+      "weekly": "Weekly limit",
+      "percent": "{n}% used",
+      "resetFive": "Resets in 2 h 10 min",
+      "resetWeek": "Resets in 3 d 4 h"
+    },
+    "activity": {
+      "media": "Music playing",
+      "recording": "Voice recorder",
+      "focus": "Focus timer",
+      "pause": "Pause the recording",
+      "stop": "Stop and save the recording"
+    },
+    "preview": {
+      "title": "Meet the island",
+      "lead": "Click a page, use the arrows, or switch the style. They are redrawn from Lunar's own panels.",
+      "activitiesTitle": "While something is happening",
+      "activitiesLead": "The closed island shows the music, the recording or the focus timer."
+    }
   }
 }
