@@ -141,6 +141,11 @@
       "lead": "Klik sebuah halaman, pakai panah, atau ganti gayanya. Semuanya digambar ulang dari panel Lunar sendiri.",
       "activitiesTitle": "Saat sesuatu sedang berjalan",
       "activitiesLead": "Pulau yang tertutup menampilkan musik, rekaman, atau timer fokus."
+    },
+    "tour": {
+      "lead": "Klik matanya, lalu geser atau pakai tombol panah untuk berpindah di antara enam halaman. Scroll untuk menjelajahinya di sini.",
+      "skip": "Lewati tur",
+      "step": "{n} dari {total}"
     }
   },
   "Download": {

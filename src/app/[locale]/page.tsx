@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
 import { IslandPreview } from "@/components/sections/IslandPreview";
+import { MeetTheIsland } from "@/components/sections/MeetTheIsland";
 import { getContent } from "@/content";
 import { alternatesFor } from "@/i18n/alternates";
 import type { Locale } from "@/i18n/routing";
@@ -38,6 +39,10 @@ export default async function Home() {
           copied: d("copied"),
         }}
         pillAction={t("pillAction")}
+      />
+      <MeetTheIsland
+        title={(await getTranslations("Island"))("preview.title")}
+        pages={content.pages.map(({ id, name, body }) => ({ id, name, body }))}
       />
       <IslandPreview />
     </>

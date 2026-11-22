@@ -10,7 +10,7 @@ import {
   StickyNote,
   Timer,
 } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, type MotionStyle } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
@@ -61,10 +61,34 @@ function PageContent({ id, wide }: { id: PageId; wide: boolean }) {
   }
 }
 
-export function IslandPanel({ islandStyle }: { islandStyle: IslandStyle }) {
+export function IslandPanel({
+  islandStyle,
+  index: controlledIndex,
+  onIndexChange,
+  frameStyle,
+  bodyStyle,
+  overlay,
+}: {
+  islandStyle: IslandStyle;
+  /** Controlled page (e.g. driven by scrolling). Without it the panel keeps its own page. */
+  index?: number;
+  /** Asked when the visitor picks a page; a controlled owner decides whether it changes. */
+  onIndexChange?: (index: number) => void;
+  /** Passed to the scaled frame, e.g. the clip-path that opens the island. */
+  frameStyle?: MotionStyle;
+  /** Style for the panel itself (background and pages, not the overlay), e.g. fading it in as it opens. */
+  bodyStyle?: MotionStyle;
+  /** Drawn on top, at the top centre, e.g. the closed pill with its eyes while the island opens. */
+  overlay?: ReactNode;
+}) {
   const t = useTranslations("Island");
   const baseId = useId();
-  const [index, setIndex] = useState(0);
+  const [ownIndex, setOwnIndex] = useState(0);
+  const index = controlledIndex ?? ownIndex;
+  const setIndex = (next: number) => {
+    if (controlledIndex === undefined) setOwnIndex(next);
+    onIndexChange?.(next);
+  };
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const { width, height } = SIZES[islandStyle].expanded;
   const notch = islandStyle === "notch";
@@ -166,64 +190,75 @@ export function IslandPanel({ islandStyle }: { islandStyle: IslandStyle }) {
   };
 
   return (
-    <IslandScaler width={width} height={height}>
+    <IslandScaler width={width} height={height} frameStyle={frameStyle}>
       <div
         className="lunar-island relative"
         style={{ width, height }}
         data-island-style={islandStyle}
       >
-        {notch ? (
-          <svg className="absolute inset-0" width={width} height={height} aria-hidden="true">
-            <path d={notchPath(width, height)} fill="var(--lunar-bg)" />
-          </svg>
-        ) : (
+        <motion.div className="absolute inset-0" style={bodyStyle}>
+          {notch ? (
+            <svg className="absolute inset-0" width={width} height={height} aria-hidden="true">
+              <path d={notchPath(width, height)} fill="var(--lunar-bg)" />
+            </svg>
+          ) : (
+            <div
+              className="absolute inset-0 border border-lunar-border bg-lunar-bg"
+              style={{ borderRadius: PANEL_RADIUS }}
+            />
+          )}
+
           <div
-            className="absolute inset-0 border border-lunar-border bg-lunar-bg"
-            style={{ borderRadius: PANEL_RADIUS }}
-          />
-        )}
+            className={cn(
+              "relative flex h-full flex-col",
+              notch ? "px-2 pt-2.5 pb-4" : "pt-3 pb-2",
+            )}
+          >
+            {notch && <div className="mb-2">{tabList}</div>}
 
-        <div
-          className={cn("relative flex h-full flex-col", notch ? "px-2 pt-2.5 pb-4" : "pt-3 pb-2")}
-        >
-          {notch && <div className="mb-2">{tabList}</div>}
-
-          <div className="relative min-h-0 flex-1 overflow-hidden">
-            <motion.div
-              className="flex h-full"
-              animate={{ x: -index * viewportWidth }}
-              transition={islandSpring}
-              drag="x"
-              dragConstraints={{ left: -last * viewportWidth, right: 0 }}
-              dragElastic={0.15}
-              onDragEnd={(_, info) => {
-                if (info.offset.x < -60) go(index + 1);
-                else if (info.offset.x > 60) go(index - 1);
-              }}
-            >
-              {PAGE_IDS.map((id, i) => (
-                <div
-                  key={id}
-                  role="tabpanel"
-                  id={`${baseId}-panel-${id}`}
-                  aria-labelledby={`${baseId}-tab-${id}`}
-                  inert={i !== index}
-                  className={cn("h-full shrink-0", notch ? "px-6" : "px-[38px]")}
-                  style={{ width: viewportWidth }}
-                >
-                  <p className="sr-only">{t(`pages.${id}.summary`)}</p>
-                  <div aria-hidden="true" className="h-full select-none">
-                    <PageContent id={id} wide={notch} />
+            <div className="relative min-h-0 flex-1 overflow-hidden">
+              <motion.div
+                className="flex h-full"
+                animate={{ x: -index * viewportWidth }}
+                transition={islandSpring}
+                drag="x"
+                dragConstraints={{ left: -last * viewportWidth, right: 0 }}
+                dragElastic={0.15}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -60) go(index + 1);
+                  else if (info.offset.x > 60) go(index - 1);
+                }}
+              >
+                {PAGE_IDS.map((id, i) => (
+                  <div
+                    key={id}
+                    role="tabpanel"
+                    id={`${baseId}-panel-${id}`}
+                    aria-labelledby={`${baseId}-tab-${id}`}
+                    inert={i !== index}
+                    className={cn("h-full shrink-0", notch ? "px-6" : "px-[38px]")}
+                    style={{ width: viewportWidth }}
+                  >
+                    <p className="sr-only">{t(`pages.${id}.summary`)}</p>
+                    <div aria-hidden="true" className="h-full select-none">
+                      <PageContent id={id} wide={notch} />
+                    </div>
                   </div>
-                </div>
-              ))}
-            </motion.div>
-            {!notch && arrow(-1)}
-            {!notch && arrow(1)}
-          </div>
+                ))}
+              </motion.div>
+              {!notch && arrow(-1)}
+              {!notch && arrow(1)}
+            </div>
 
-          {!notch && <div className="mt-1">{tabList}</div>}
-        </div>
+            {!notch && <div className="mt-1">{tabList}</div>}
+          </div>
+        </motion.div>
+
+        {overlay && (
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex justify-center">
+            {overlay}
+          </div>
+        )}
 
         <p className="sr-only" aria-live="polite">
           {t("pageOf", {

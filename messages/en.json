@@ -141,6 +141,11 @@
       "lead": "Click a page, use the arrows, or switch the style. They are redrawn from Lunar's own panels.",
       "activitiesTitle": "While something is happening",
       "activitiesLead": "The closed island shows the music, the recording or the focus timer."
+    },
+    "tour": {
+      "lead": "Click the eyes, then swipe or use the arrow keys to move between six pages. Scroll to walk through them here.",
+      "skip": "Skip the tour",
+      "step": "{n} of {total}"
     }
   },
   "Download": {
