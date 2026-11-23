@@ -177,6 +177,45 @@ export const id = {
     thisSite:
       "Situs ini tidak memakai cookie, analytics, atau skrip pihak ketiga. Situs ini tidak memuat apa pun selain dari dirinya sendiri.",
     source: "README.md Your privacy; PRIVACY.md Summary, What is never logged, Recordings",
+    table: [
+      {
+        name: "Pengecekan pembaruan",
+        what: "Permintaan rilis Lunar terbaru. Tanpa akun, tanpa pengenal, tanpa apa pun tentang Anda atau file Anda.",
+        when: "Sesaat setelah Lunar dibuka, lalu sekali sehari.",
+        where: "GitHub (api.github.com)",
+        off: "Pengaturan → Update → Cek update. Jika mati, tidak ada permintaan sama sekali.",
+        source: "PRIVACY.md Update check",
+      },
+      {
+        name: "Mengunduh pembaruan",
+        what: "Lunar.msi, hanya saat Anda memilih Instal sekarang. Hanya dijalankan jika ukuran dan SHA-256-nya cocok dengan rilisnya.",
+        when: "Hanya saat Anda memilih Instal sekarang.",
+        where: "Server GitHub sendiri",
+        off: "Pilih Nanti, atau matikan pengecekan pembaruan.",
+        source: "PRIVACY.md Update check",
+      },
+      {
+        name: "Halaman Pemakaian",
+        what: "Batas 5 jam dan mingguan Claude Anda, diminta dengan sign-in Claude Code yang sudah ada di PC Anda (hanya dibaca).",
+        when: "Hanya setelah halaman ini Anda nyalakan; sekitar 5 menit sekali saat pulau terbuka, 15 menit sekali saat tertutup.",
+        where: "Anthropic (api.anthropic.com)",
+        off: "Mati sampai Anda menyalakannya.",
+        source: "PRIVACY.md Usage page",
+      },
+      {
+        name: "Terjemahan layar",
+        what: "Hanya teks yang dikenali Windows di layar Anda, tidak pernah gambarnya. Tidak ada yang disimpan.",
+        when: "Hanya saat Anda meminta, setelah Anda mengizinkan sekali.",
+        where: "Microsoft Azure AI Translator, dengan kunci Anda sendiri",
+        off: "Pengaturan → Terjemahan layar. Jika mati, tidak ada pintasan, tangkapan, atau permintaan.",
+        source: "PRIVACY.md Screen translation",
+      },
+    ],
+    notes:
+      "Catatan berupa teks biasa di profil Windows Anda (%LocalAppData%Lunar\notes.json), tidak dienkripsi, tidak pernah dikirim atau dicatat.",
+    logs: "Log lokal disimpan di %LocalAppData%LunarLogs, paling banyak sekitar 7 MiB, dan hanya berisi nama kejadian dan kategori galat yang tetap. Lunar tidak pernah mengunggahnya.",
+    uninstall:
+      "Saat dihapus, Lunar bertanya apakah pengaturan, catatan, dan log ikut dihapus. Rekaman ada di folder Anda sendiri dan tidak pernah dihapus.",
   },
 
   install: {
@@ -201,41 +240,49 @@ export const id = {
 
   limits: [
     {
+      id: "windows11",
       title: "Hanya Windows 11",
       body: "Lunar berjalan di Windows 11, 64-bit. Windows 10 tidak didukung.",
       source: "README.md Good to know; release notes v1.0.6 Requirements",
     },
     {
+      id: "wordToPdf",
       title: "Word ke PDF belum ada",
       body: "Dokumen Word bisa dibuat dari gambar, tetapi file Word belum bisa dikonversi ke PDF.",
       source: "README.md Good to know",
     },
     {
+      id: "windowsSwitches",
       title: "Beberapa tombol bergantung pada Windows",
       body: "Tombol Wi-Fi dan Bluetooth, penggeseran posisi media, dan kecerahan monitor eksternal bergantung pada Windows, driver, aplikasi media, dan monitornya. Jika sesuatu tidak diizinkan, Lunar mengatakannya dan membuka pengaturan Windows yang tepat.",
       source: "README.md Good to know",
     },
     {
+      id: "dnd",
       title: "Jangan Ganggu memakai fitur yang tidak didokumentasikan",
       body: "Lunar menyalakan Jangan Ganggu lewat fitur Windows yang tidak didokumentasikan Microsoft. Jika Windows menolak, timer tetap berjalan dan memberi tahu Anda.",
       source: "README.md Good to know",
     },
     {
+      id: "screenshot",
       title: "Anda juga tidak bisa men-screenshot Lunar",
       body: "Karena tak terlihat oleh tangkapan layar, screenshot Anda sendiri juga tidak menampilkan Lunar.",
       source: "README.md Good to know",
     },
     {
+      id: "translateKey",
       title: "Terjemahan perlu kunci sendiri",
       body: "Terjemahan layar perlu kunci Azure Translator milik Anda (paket gratis Microsoft) dan koneksi internet. Bahasa Jepang perlu bahasa Jepang Windows untuk membaca. Ini terjemahan mesin dan bisa salah.",
       source: "README.md Good to know",
     },
     {
+      id: "usageAddress",
       title: "Halaman Pemakaian bisa berhenti bekerja",
       body: "Halaman ini memakai alamat Anthropic yang tidak didokumentasikan secara resmi. Lunar tidak berafiliasi dengan Anthropic.",
       source: "README.md Good to know",
     },
     {
+      id: "oneMonitor",
       title: "Diuji dengan satu monitor",
       body: "Lunar sudah diuji di Windows 11 dengan satu monitor.",
       source: "README.md Good to know",

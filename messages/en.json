@@ -233,5 +233,54 @@
       "title": "Give your desktop a pair of eyes",
       "lead": "Free, small, and it stays out of your way."
     }
+  },
+  "Pages": {
+    "features": {
+      "title": "Features",
+      "lead": "Six pages in the island, two styles, and a few things that work without opening it.",
+      "onThisPage": "On this page",
+      "needs": "Good to know",
+      "more": {
+        "style": "Pill or Notch",
+        "translate": "Screen translation",
+        "updates": "Updates",
+        "everyone": "For everyone"
+      }
+    },
+    "privacy": {
+      "title": "Privacy",
+      "lead": "What Lunar does with your data, in short. The full notice is installed next to the app and on GitHub.",
+      "tableTitle": "Everything that can leave your PC",
+      "what": "What",
+      "when": "When",
+      "where": "Where to",
+      "off": "How to turn it off",
+      "onYourPc": "On your PC",
+      "thisSite": "This website",
+      "full": "Read the full privacy notice"
+    },
+    "download": {
+      "title": "Download Lunar",
+      "lead": "One small installer for Windows 11. No account, no administrator rights.",
+      "released": "Released",
+      "size": "Size",
+      "version": "Version",
+      "sha": "SHA-256",
+      "allReleases": "All releases on GitHub",
+      "steps": "Install",
+      "check": "Check your download",
+      "update": "Updating and removing",
+      "requirements": "Requirements"
+    },
+    "changelog": {
+      "title": "Changelog",
+      "lead": "What changed in each version of Lunar.",
+      "notes": "Release notes on GitHub"
+    },
+    "notFound": {
+      "title": "Lunar can't find that page",
+      "body": "The link may be old or mistyped. The island is still here, though.",
+      "home": "Go to the home page"
+    }
   }
 }

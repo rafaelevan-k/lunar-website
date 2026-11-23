@@ -29,6 +29,16 @@ export type WhyId =
 
 export type WhyItem = Item & { id: WhyId };
 
+export type LimitId =
+  | "windows11"
+  | "wordToPdf"
+  | "windowsSwitches"
+  | "dnd"
+  | "screenshot"
+  | "translateKey"
+  | "usageAddress"
+  | "oneMonitor";
+
 export type PageItem = {
   id: "system" | "media" | "pomodoro" | "converter" | "notes" | "usage";
   name: string;
@@ -63,6 +73,18 @@ export type SiteContent = {
     recordings: string;
     thisSite: string;
     source: Source;
+    /** Everything that can leave the PC, for the privacy page (PRIVACY.md). */
+    table: {
+      name: string;
+      what: string;
+      when: string;
+      where: string;
+      off: string;
+      source: Source;
+    }[];
+    notes: string;
+    logs: string;
+    uninstall: string;
   };
   install: {
     steps: string[];
@@ -74,7 +96,7 @@ export type SiteContent = {
     requirements: string;
     source: Source;
   };
-  limits: Item[];
+  limits: (Item & { id: LimitId })[];
   openSource: { body: string; stack: string; source: Source };
   faq: { question: string; answer: string; source: Source }[];
   changelog: ReleaseNote[];

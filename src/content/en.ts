@@ -177,6 +177,45 @@ export const en = {
     thisSite:
       "This website uses no cookies, no analytics and no third-party scripts. It loads nothing from anywhere but itself.",
     source: "README.md Your privacy; PRIVACY.md Summary, What is never logged, Recordings",
+    table: [
+      {
+        name: "Update check",
+        what: "A request for the newest Lunar release. No account, no identifier, nothing about you or your files.",
+        when: "Shortly after Lunar starts, then once a day.",
+        where: "GitHub (api.github.com)",
+        off: "Settings → Updates → Check for updates. Off means no request at all.",
+        source: "PRIVACY.md Update check",
+      },
+      {
+        name: "Downloading an update",
+        what: "Lunar.msi, only when you choose Install now. It runs only if its size and SHA-256 match the release.",
+        when: "Only when you choose Install now.",
+        where: "GitHub's own servers",
+        off: "Choose Later, or turn the update check off.",
+        source: "PRIVACY.md Update check",
+      },
+      {
+        name: "Usage page",
+        what: "Your Claude 5-hour and weekly limits, asked with the Claude Code sign-in that is already on your PC (read-only).",
+        when: "Only after you turn the page on; about every 5 minutes while the island is open, every 15 while closed.",
+        where: "Anthropic (api.anthropic.com)",
+        off: "Off until you turn it on.",
+        source: "PRIVACY.md Usage page",
+      },
+      {
+        name: "Screen translation",
+        what: "Only the text Windows recognised on your screen, never a picture of it. Nothing is kept.",
+        when: "Only when you ask, after you allowed it once.",
+        where: "Microsoft Azure AI Translator, with your own key",
+        off: "Settings → Screen translation. Off means no shortcut, no capture, no request.",
+        source: "PRIVACY.md Screen translation",
+      },
+    ],
+    notes:
+      "Notes are plain text in your Windows profile (%LocalAppData%Lunar\notes.json), not encrypted, never sent or logged.",
+    logs: "The local log is kept in %LocalAppData%LunarLogs, about 7 MiB at most, and holds only fixed event names and error categories. Lunar never uploads it.",
+    uninstall:
+      "Uninstalling asks whether to delete settings, notes and logs too. Recordings are in your own folder and are never deleted.",
   },
 
   install: {
@@ -201,41 +240,49 @@ export const en = {
 
   limits: [
     {
+      id: "windows11",
       title: "Windows 11 only",
       body: "Lunar runs on Windows 11, 64-bit. Windows 10 is not supported.",
       source: "README.md Good to know; release notes v1.0.6 Requirements",
     },
     {
+      id: "wordToPdf",
       title: "Word to PDF isn't there yet",
       body: "Word documents can be made from pictures, but Word files can't be converted to PDF yet.",
       source: "README.md Good to know",
     },
     {
+      id: "windowsSwitches",
       title: "Some switches depend on Windows",
       body: "Wi-Fi and Bluetooth switches, seeking and external-monitor brightness depend on Windows, your drivers, the media app and the monitor. Where something isn't allowed, Lunar says so and opens the right Windows setting.",
       source: "README.md Good to know",
     },
     {
+      id: "dnd",
       title: "Do Not Disturb uses an undocumented feature",
       body: "Lunar turns on Do Not Disturb through a Windows feature Microsoft doesn't document. If Windows says no, the timer still runs and tells you.",
       source: "README.md Good to know",
     },
     {
+      id: "screenshot",
       title: "You can't screenshot Lunar either",
       body: "Being invisible to screen capture means your own screenshots leave Lunar out too.",
       source: "README.md Good to know",
     },
     {
+      id: "translateKey",
       title: "Translation needs your own key",
       body: "Screen translation needs your own Azure Translator key (Microsoft's free tier) and an internet connection. Japanese needs Windows' Japanese language for reading. It is machine translation and can be wrong.",
       source: "README.md Good to know",
     },
     {
+      id: "usageAddress",
       title: "The Usage page may stop working",
       body: "It uses an Anthropic address that isn't officially documented. Lunar is not affiliated with Anthropic.",
       source: "README.md Good to know",
     },
     {
+      id: "oneMonitor",
       title: "Tested with one monitor",
       body: "Lunar has been tested on Windows 11 with a single monitor.",
       source: "README.md Good to know",

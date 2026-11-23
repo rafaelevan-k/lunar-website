@@ -37,8 +37,11 @@ type LunarEyesProps = {
   className?: string;
   /** Blink by themselves every few seconds. */
   blink?: boolean;
-  /** "page": the pupils follow the pointer anywhere on the page. "none": they look ahead. */
-  gaze?: "page" | "none";
+  /**
+   * "page": the pupils follow the pointer anywhere on the page. "wander": they look left and right
+   * by themselves, as if searching (the 404 page). "none": they look ahead.
+   */
+  gaze?: "page" | "wander" | "none";
   /** Hold a smile while true (e.g. while the download button is hovered). */
   smile?: boolean;
   /** Grow a little on hover and shrink on press, like the app. For eyes inside a button. */
@@ -189,6 +192,27 @@ export function LunarEyes({
         p.y.jump(0);
       }
       return;
+    }
+    if (gaze === "wander") {
+      // Look somewhere, hold, look somewhere else. Paused while the tab is hidden.
+      const spots = [-1, -0.5, 0, 0.5, 1];
+      let timer: number | undefined;
+      const look = () => {
+        if (!document.hidden) {
+          const x = spots[Math.floor(Math.random() * spots.length)] * GAZE.maxOffset;
+          const y = (Math.random() - 0.5) * GAZE.maxOffset * 0.6;
+          for (const p of pupils) {
+            animate(p.x, x, { duration: 0.26, ease: "easeInOut" });
+            animate(p.y, y, { duration: 0.26, ease: "easeInOut" });
+          }
+        }
+        timer = window.setTimeout(look, between([900, 2200]));
+      };
+      timer = window.setTimeout(look, 600);
+      return () => {
+        window.clearTimeout(timer);
+        neutral();
+      };
     }
     let frame = 0;
     let returnTimer: number | undefined;

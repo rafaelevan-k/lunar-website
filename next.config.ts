@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   // Dev only: lets the dev server be opened at 127.0.0.1 as well as localhost.
   allowedDevOrigins: ["127.0.0.1"],
   cacheComponents: true,
+  // Unknown URLs get app/global-not-found.tsx: the root layout sits under [locale], so there is
+  // no single layout to build a 404 from.
+  experimental: { globalNotFound: true },
   partialPrefetching: true,
   turbopack: {
     rules: {

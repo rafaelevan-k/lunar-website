@@ -15,7 +15,8 @@ import { WhyLunar } from "@/components/sections/WhyLunar";
 import { getContent } from "@/content";
 import { alternatesFor } from "@/i18n/alternates";
 import type { Locale } from "@/i18n/routing";
-import { DOWNLOAD_URL, formatReleaseDate, formatSize, getRelease } from "@/lib/release";
+import { downloadButtonText } from "@/lib/download-text";
+import { DOWNLOAD_URL, getRelease } from "@/lib/release";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { alternates: alternatesFor("/", await getLocale()) };
@@ -25,24 +26,13 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations("Home");
-  const d = await getTranslations("Download");
   const s = await getTranslations("Sections");
   const island = await getTranslations("Island");
   const content = getContent(locale);
   const release = getRelease();
   const why = (id: string) => content.why.find((w) => w.id === id)!;
 
-  const downloadText = {
-    button: t("download"),
-    details: d("details", {
-      version: release.version,
-      size: formatSize(release.sizeBytes, locale),
-      date: formatReleaseDate(release.publishedAt, locale),
-    }),
-    notWindows: d("notWindows"),
-    copy: d("copy"),
-    copied: d("copied"),
-  };
+  const downloadText = await downloadButtonText(locale, release);
 
   return (
     <>

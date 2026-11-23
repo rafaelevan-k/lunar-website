@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { LunarEyes } from "@/components/lunar/LunarEyes";
 import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { LATEST_RELEASE_URL, NAV_LINKS } from "@/content/site";
+import { NAV_LINKS } from "@/content/site";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { fade, islandSpring } from "@/lib/motion";
@@ -103,12 +103,12 @@ export function SiteHeader() {
           <LocaleSwitcher variant="compact" className="hidden md:grid" />
           <ThemeToggle className="hidden md:grid" />
 
-          <a
-            href={LATEST_RELEASE_URL}
+          <Link
+            href="/download"
             className="ml-1 flex h-11 items-center rounded-full bg-lunar-accent px-5 text-sm font-medium text-lunar-on-accent transition-[filter] hover:brightness-110"
           >
             {common("download")}
-          </a>
+          </Link>
 
           <button
             ref={buttonRef}

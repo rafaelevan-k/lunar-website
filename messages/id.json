@@ -233,5 +233,54 @@
       "title": "Beri desktop Anda sepasang mata",
       "lead": "Gratis, kecil, dan tidak mengganggu."
     }
+  },
+  "Pages": {
+    "features": {
+      "title": "Fitur",
+      "lead": "Enam halaman di dalam pulau, dua gaya, dan beberapa hal yang bekerja tanpa membukanya.",
+      "onThisPage": "Di halaman ini",
+      "needs": "Perlu diketahui",
+      "more": {
+        "style": "Pill atau Notch",
+        "translate": "Terjemahan layar",
+        "updates": "Pembaruan",
+        "everyone": "Untuk semua orang"
+      }
+    },
+    "privacy": {
+      "title": "Privasi",
+      "lead": "Apa yang Lunar lakukan dengan data Anda, secara singkat. Pemberitahuan lengkapnya terpasang bersama aplikasi dan ada di GitHub.",
+      "tableTitle": "Semua yang bisa keluar dari PC Anda",
+      "what": "Apa",
+      "when": "Kapan",
+      "where": "Ke mana",
+      "off": "Cara mematikan",
+      "onYourPc": "Di PC Anda",
+      "thisSite": "Situs ini",
+      "full": "Baca pemberitahuan privasi lengkap"
+    },
+    "download": {
+      "title": "Unduh Lunar",
+      "lead": "Satu installer kecil untuk Windows 11. Tanpa akun, tanpa hak administrator.",
+      "released": "Rilis",
+      "size": "Ukuran",
+      "version": "Versi",
+      "sha": "SHA-256",
+      "allReleases": "Semua rilis di GitHub",
+      "steps": "Pasang",
+      "check": "Periksa unduhan Anda",
+      "update": "Memperbarui dan menghapus",
+      "requirements": "Persyaratan"
+    },
+    "changelog": {
+      "title": "Riwayat versi",
+      "lead": "Apa yang berubah di setiap versi Lunar.",
+      "notes": "Catatan rilis di GitHub"
+    },
+    "notFound": {
+      "title": "Lunar tidak menemukan halaman itu",
+      "body": "Tautannya mungkin sudah lama atau salah ketik. Tapi pulaunya masih di sini.",
+      "home": "Ke beranda"
+    }
   }
 }
