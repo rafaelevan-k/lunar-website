@@ -114,24 +114,19 @@ function useOpeningClip(open: MotionValue<number>, style: IslandStyle) {
 export function MeetTheIsland({ title, pages }: { title: string; pages: Page[] }) {
   const reduced = useReducedMotion();
   const [islandStyle, setIslandStyle] = useState<IslandStyle>("pill");
-  // Keyed on `reduced`: the first render is always the plain version (the server can't know the
-  // visitor's setting); the pinned version mounts fresh once the browser says motion is fine.
-  return reduced ? (
-    <PlainTour
-      key="plain"
-      title={title}
-      pages={pages}
-      islandStyle={islandStyle}
-      setIslandStyle={setIslandStyle}
-    />
-  ) : (
-    <PinnedTour
-      key="pinned"
-      title={title}
-      pages={pages}
-      islandStyle={islandStyle}
-      setIslandStyle={setIslandStyle}
-    />
+  const props = { title, pages, islandStyle, setIslandStyle };
+  // The server HTML is the pinned version, which most visitors get, so hydrating doesn't swap it.
+  // Without JavaScript the <noscript> copy takes its place: the plain version lists every page.
+  // With reduced motion the plain version replaces it once the browser says so.
+  if (reduced) return <PlainTour key="plain" {...props} />;
+  return (
+    <>
+      <PinnedTour key="pinned" {...props} />
+      <noscript>
+        <style>{"[data-tour=pinned]{display:none}"}</style>
+        <PlainTour {...props} />
+      </noscript>
+    </>
   );
 }
 

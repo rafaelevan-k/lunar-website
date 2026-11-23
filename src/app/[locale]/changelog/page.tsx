@@ -53,6 +53,7 @@ export default async function ChangelogPage() {
                 ))}
               </ul>
               <a
+                rel="noopener noreferrer"
                 href={`${LUNAR_REPO_URL}/releases/tag/v${release.version}`}
                 className="mt-4 inline-flex min-h-11 items-center gap-1 text-sm text-lunar-text-2 underline underline-offset-4 hover:text-lunar-text"
               >

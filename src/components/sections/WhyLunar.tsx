@@ -27,13 +27,23 @@ const IslandViewer = dynamic(() => import("@/components/three/IslandViewer"), { 
 type Item = { id: WhyId; title: string; body: string };
 
 /** The same face, drawn flat: the fallback without WebGL and the picture until 3D is ready. */
-function FlatIsland({ id, className }: { id: WhyId; className?: string }) {
+function FlatIsland({
+  id,
+  draw: active,
+  className,
+}: {
+  id: WhyId;
+  draw: boolean;
+  className?: string;
+}) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const shape = faceShape(id);
   const { w, h } = FACE_SIZE[shape];
 
-  // Drawn whenever the canvas gets its size (it can be 0 wide on the first pass).
+  // Drawn once the section is near the screen (not while the page loads), and again whenever the
+  // canvas gets a new size (it can be 0 wide on the first pass). The box keeps its size meanwhile.
   useEffect(() => {
+    if (!active) return;
     const el = canvas.current;
     const ctx = el?.getContext("2d");
     if (!el || !ctx) return;
@@ -48,7 +58,7 @@ function FlatIsland({ id, className }: { id: WhyId; className?: string }) {
     observer.observe(el);
     draw();
     return () => observer.disconnect();
-  }, [id, w, h]);
+  }, [active, id, w, h]);
 
   return (
     <div
@@ -93,16 +103,20 @@ export function WhyLunar({ items }: { items: Item[] }) {
     [items],
   );
 
-  // Load the 3D only when the section is close to the screen.
+  // Nothing happens until the section is close to the screen: then check for WebGL (creating a
+  // test context is not free) and load the 3D, or draw the flat faces.
   useEffect(() => {
-    // Reads the browser, so it can only run after hydration.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setWebgl(canUseWebGL());
     const el = section.current;
     if (!el) return;
-    const observer = new IntersectionObserver(([entry]) => entry.isIntersecting && setNear(true), {
-      rootMargin: "600px 0px",
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setWebgl(canUseWebGL());
+        setNear(true);
+        observer.disconnect();
+      },
+      { rootMargin: "600px 0px" },
+    );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
@@ -141,7 +155,13 @@ export function WhyLunar({ items }: { items: Item[] }) {
                   i === 0 ? "aspect-[16/6]" : "aspect-[16/8]",
                 )}
               >
-                {!show3D && <FlatIsland id={item.id} className={i === 0 ? "w-[42%]" : "w-[64%]"} />}
+                {!show3D && (
+                  <FlatIsland
+                    id={item.id}
+                    draw={near}
+                    className={i === 0 ? "w-[42%]" : "w-[64%]"}
+                  />
+                )}
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <h3 className="text-lg font-semibold">{item.title}</h3>
@@ -258,7 +278,7 @@ function DetailDialog({
               }}
             />
           )}
-          {!(use3D && ready) && <FlatIsland id={item.id} className="w-[62%]" />}
+          {!(use3D && ready) && <FlatIsland id={item.id} draw className="w-[62%]" />}
         </div>
         <div className="p-8">
           <h2 id="why-detail-title" className="text-3xl font-bold tracking-tight">

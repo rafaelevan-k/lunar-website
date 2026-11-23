@@ -37,7 +37,7 @@ test("on Windows there is no note; elsewhere the note and a copy button appear",
   await page.goto("/en");
   const note = page.getByTestId("not-windows").first();
   if (!isMobile) {
-    await expect(note).toHaveCount(0);
+    await expect(note).toBeHidden();
     return;
   }
   await expect(note).toContainText("Lunar is for Windows 11 PCs");

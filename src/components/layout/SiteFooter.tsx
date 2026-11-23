@@ -48,17 +48,21 @@ export function SiteFooter() {
           </h2>
           <ul className="mt-2">
             <li>
-              <a href={LATEST_RELEASE_URL} className={linkClass}>
+              <a rel="noopener noreferrer" href={LATEST_RELEASE_URL} className={linkClass}>
                 {t("latestRelease")}
               </a>
             </li>
             <li>
-              <a href={LUNAR_REPO_URL} className={linkClass}>
+              <a rel="noopener noreferrer" href={LUNAR_REPO_URL} className={linkClass}>
                 {t("sourceCode")}
               </a>
             </li>
             <li>
-              <a href={`${LUNAR_REPO_URL}/blob/main/docs/PRIVACY.md`} className={linkClass}>
+              <a
+                rel="noopener noreferrer"
+                href={`${LUNAR_REPO_URL}/blob/main/docs/PRIVACY.md`}
+                className={linkClass}
+              >
                 {t("privacyNotice")}
               </a>
             </li>

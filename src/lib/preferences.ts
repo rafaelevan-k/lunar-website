@@ -1,7 +1,9 @@
 /*
  * The visitor's display preferences: theme and motion. They live on <html> as data-theme and
  * data-motion, and are kept in localStorage (never a cookie). PREFERENCE_SCRIPT applies the saved
- * values before the first paint, so the page never flashes the wrong theme.
+ * values before the first paint, so the page never flashes the wrong theme. It also marks a
+ * visitor who is not on a Windows desktop (data-platform="other"), so the download note can show
+ * from the first paint instead of pushing the page down later.
  */
 
 export const THEMES = ["system", "dark", "light"] as const;
@@ -17,7 +19,7 @@ const KEYS = { theme: "lunar-theme", motion: "lunar-motion" } as const;
 const CHANGE_EVENT = "lunar:preferences";
 
 // Kept as a fixed string (no interpolation) so a CSP hash can allow it later (WEB-04).
-export const PREFERENCE_SCRIPT = `(function(){try{var d=document.documentElement,t=localStorage.getItem("lunar-theme"),m=localStorage.getItem("lunar-motion");if(t==="system"||t==="dark"||t==="light")d.setAttribute("data-theme",t);if(m==="system"||m==="reduce"||m==="full")d.setAttribute("data-motion",m)}catch(e){}})()`;
+export const PREFERENCE_SCRIPT = `(function(){try{var d=document.documentElement,t=localStorage.getItem("lunar-theme"),m=localStorage.getItem("lunar-motion");if(t==="system"||t==="dark"||t==="light")d.setAttribute("data-theme",t);if(m==="system"||m==="reduce"||m==="full")d.setAttribute("data-motion",m);if(!/Windows NT/.test(navigator.userAgent))d.setAttribute("data-platform","other")}catch(e){}})()`;
 
 function isTheme(value: string | null): value is Theme {
   return (THEMES as readonly string[]).includes(value ?? "");

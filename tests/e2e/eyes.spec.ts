@@ -56,6 +56,9 @@ test.describe("Lunar's eyes", () => {
   test("with reduced motion they neither follow the pointer nor blink", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/en");
+    // The server renders the moving version; the still one replaces it after hydration (the
+    // plain tour appears at the same moment).
+    await page.locator("[data-tour=plain]").waitFor();
     const box = (await page
       .getByRole("button", { name: "Make Lunar smile" })
       .first()

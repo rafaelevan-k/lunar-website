@@ -10,13 +10,21 @@ import { useReducedMotion } from "./ReducedMotionProvider";
  * - Touch keeps the phone's own scrolling (syncTouch off).
  * - Anchor links and the keyboard keep their native behaviour (anchors off), so the skip link
  *   still moves focus and find-in-page still works.
+ *
+ * Lenis sits next to the page, not around it (useLenis finds the root instance on its own), so
+ * turning it on or off never remounts the page.
  */
 export function SmoothScroll({ children }: { children: ReactNode }) {
   const reduced = useReducedMotion();
-  if (reduced) return <>{children}</>;
   return (
-    <ReactLenis root options={{ lerp: 0.12, smoothWheel: true, syncTouch: false, anchors: false }}>
+    <>
+      {!reduced && (
+        <ReactLenis
+          root
+          options={{ lerp: 0.12, smoothWheel: true, syncTouch: false, anchors: false }}
+        />
+      )}
       {children}
-    </ReactLenis>
+    </>
   );
 }

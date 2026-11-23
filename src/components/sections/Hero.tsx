@@ -70,8 +70,8 @@ export function Hero({
     >
       {/* Measured for the scroll trip; it is never transformed itself, so the numbers stay true. */}
       <div ref={pill} className="relative">
-        {/* Keyed on `reduced`: the first render is always "reduced", and Motion doesn't attach
-            scroll-linked styles when they appear later, so these mount again once it is known. */}
+        {/* Keyed on `reduced`: the server renders the moving version, and Motion doesn't detach
+            or attach scroll-linked styles later, so these mount again if the setting differs. */}
         <motion.div
           key={`halo-${reduced}`}
           aria-hidden="true"

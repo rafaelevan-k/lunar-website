@@ -53,6 +53,7 @@ export default async function DownloadPage() {
             )}
           </dl>
           <a
+            rel="noopener noreferrer"
             href={`${LUNAR_REPO_URL}/releases`}
             className="inline-flex min-h-11 items-center gap-1 text-lunar-text-2 underline underline-offset-4 hover:text-lunar-text"
           >

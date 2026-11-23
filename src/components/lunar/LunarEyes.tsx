@@ -1,6 +1,8 @@
 "use client";
 
-import { animate, motion, useMotionValue, type MotionValue } from "motion/react";
+// animateSingleValue, not animate: animate() can also drive elements, objects and sequences, and
+// that code would load on every page; the eyes only move motion values.
+import { animateSingleValue, motion, useMotionValue, type MotionValue } from "motion/react";
 import { useEffect, useId, useImperativeHandle, useRef, useState, type Ref } from "react";
 import { useReducedMotion } from "@/components/motion/ReducedMotionProvider";
 import { cn } from "@/lib/cn";
@@ -100,7 +102,7 @@ export function LunarEyes({
   );
 
   // Waking up: the eyes open a moment after they first appear. Reads the motion setting directly,
-  // because the context says "reduced" until the browser has reported the real setting.
+  // because during hydration the context still has the server's guess (motion on).
   // Without JavaScript a CSS rule keeps the lids open (globals.css, [data-wake]).
   useEffect(() => {
     if (awake) return;
@@ -112,7 +114,7 @@ export function LunarEyes({
           lid.jump(0);
           setAwake(true);
         } else {
-          animate(lid, 0, { duration: WAKE.openMs / 1000, ease: "easeOut" }).then(() =>
+          animateSingleValue(lid, 0, { duration: WAKE.openMs / 1000, ease: "easeOut" }).then(() =>
             setAwake(true),
           );
         }
@@ -139,9 +141,9 @@ export function LunarEyes({
 
     const blinkOnce = (thenDouble: boolean) => {
       const total = between(BLINK.durationMs);
-      animate(lid, 1, { duration: (total * BLINK.closeShare) / 1000, ease: "easeIn" });
+      animateSingleValue(lid, 1, { duration: (total * BLINK.closeShare) / 1000, ease: "easeIn" });
       at(total * (BLINK.closeShare + BLINK.holdShare), () => {
-        animate(lid, 0, {
+        animateSingleValue(lid, 0, {
           duration: (total * (1 - BLINK.closeShare - BLINK.holdShare)) / 1000,
           ease: "easeOut",
         });
@@ -154,7 +156,7 @@ export function LunarEyes({
     function tick() {
       if (performance.now() - lastInteraction >= SLEEP.afterMs) {
         asleep = true;
-        animate(lid, SLEEP.closure, { duration: SLEEP.inMs / 1000 });
+        animateSingleValue(lid, SLEEP.closure, { duration: SLEEP.inMs / 1000 });
         return;
       }
       blinkOnce(Math.random() < BLINK.doubleChance);
@@ -164,7 +166,7 @@ export function LunarEyes({
       lastInteraction = performance.now();
       if (asleep) {
         asleep = false;
-        animate(lid, 0, { duration: SLEEP.wakeMs / 1000 });
+        animateSingleValue(lid, 0, { duration: SLEEP.wakeMs / 1000 });
         scheduleNext();
       }
     };
@@ -182,8 +184,8 @@ export function LunarEyes({
   useEffect(() => {
     const neutral = () => {
       for (const p of pupils) {
-        animate(p.x, 0, { duration: GAZE.returnMs / 1000, ease: "easeOut" });
-        animate(p.y, 0, { duration: GAZE.returnMs / 1000, ease: "easeOut" });
+        animateSingleValue(p.x, 0, { duration: GAZE.returnMs / 1000, ease: "easeOut" });
+        animateSingleValue(p.y, 0, { duration: GAZE.returnMs / 1000, ease: "easeOut" });
       }
     };
     if (gaze === "none" || reduced || !visible) {
@@ -202,8 +204,8 @@ export function LunarEyes({
           const x = spots[Math.floor(Math.random() * spots.length)] * GAZE.maxOffset;
           const y = (Math.random() - 0.5) * GAZE.maxOffset * 0.6;
           for (const p of pupils) {
-            animate(p.x, x, { duration: 0.26, ease: "easeInOut" });
-            animate(p.y, y, { duration: 0.26, ease: "easeInOut" });
+            animateSingleValue(p.x, x, { duration: 0.26, ease: "easeInOut" });
+            animateSingleValue(p.y, y, { duration: 0.26, ease: "easeInOut" });
           }
         }
         timer = window.setTimeout(look, between([900, 2200]));
@@ -226,8 +228,8 @@ export function LunarEyes({
         const dx = (pointer.x - (rect.left + center.x * unit)) / unit;
         const dy = (pointer.y - (rect.top + center.y * unit)) / unit;
         const { x, y } = gazeOffset(dx, dy);
-        animate(pupils[i].x, x, { duration: GAZE.followMs / 1000, ease: "easeOut" });
-        animate(pupils[i].y, y, { duration: GAZE.followMs / 1000, ease: "easeOut" });
+        animateSingleValue(pupils[i].x, x, { duration: GAZE.followMs / 1000, ease: "easeOut" });
+        animateSingleValue(pupils[i].y, y, { duration: GAZE.followMs / 1000, ease: "easeOut" });
       });
     };
     const onMove = (event: PointerEvent) => {
@@ -263,8 +265,8 @@ export function LunarEyes({
       return;
     }
     const controls = smiling
-      ? animate(cheek, 0, { duration: SMILE.inMs / 1000, ease: "backOut" })
-      : animate(cheek, SMILE.hiddenY, { duration: SMILE.outMs / 1000, ease: "easeIn" });
+      ? animateSingleValue(cheek, 0, { duration: SMILE.inMs / 1000, ease: "backOut" })
+      : animateSingleValue(cheek, SMILE.hiddenY, { duration: SMILE.outMs / 1000, ease: "easeIn" });
     return () => controls.stop();
   }, [smiling, reduced, cheek]);
 
@@ -275,9 +277,10 @@ export function LunarEyes({
         setCelebrating(true);
         window.setTimeout(() => setCelebrating(false), SMILE.holdUntilMs);
         if (reduced) return;
-        animate(hop, SMILE.hopY, { duration: SMILE.hopUpMs / 1000, ease: "easeOut" }).then(() =>
-          animate(hop, 0, { type: "spring", stiffness: 700, damping: 14 }),
-        );
+        animateSingleValue(hop, SMILE.hopY, {
+          duration: SMILE.hopUpMs / 1000,
+          ease: "easeOut",
+        }).then(() => animateSingleValue(hop, 0, { type: "spring", stiffness: 700, damping: 14 }));
       },
     }),
     [reduced, hop],

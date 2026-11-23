@@ -19,6 +19,7 @@ export async function WhatsNew({
           {t("title", { version })}
         </h2>
         <a
+          rel="noopener noreferrer"
           href={releaseUrl}
           className="inline-flex min-h-11 items-center gap-1 text-lunar-text-2 underline underline-offset-4 hover:text-lunar-text"
         >

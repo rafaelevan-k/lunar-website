@@ -1,7 +1,7 @@
 "use client";
 
 import { Download, Monitor } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/cn";
 
 /*
@@ -19,12 +19,6 @@ export type DownloadButtonText = {
   copied: string;
 };
 
-// The user-agent string is enough here: "Windows NT" covers Windows 10 and 11 desktops, and a
-// wrong guess only shows or hides a note; the download always works.
-function isWindowsDesktop() {
-  return /Windows NT/.test(navigator.userAgent);
-}
-
 export function DownloadButton({
   href,
   text,
@@ -37,15 +31,7 @@ export function DownloadButton({
   onIntent?: (active: boolean) => void;
   className?: string;
 }) {
-  // Rendered as Windows on the server, so the button never jumps for most visitors.
-  const [windows, setWindows] = useState(true);
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    // Reads the browser, so it can only run after hydration.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setWindows(isWindowsDesktop());
-  }, []);
 
   const copy = async () => {
     try {
@@ -60,6 +46,7 @@ export function DownloadButton({
   return (
     <div className={cn("flex flex-col items-center gap-3", className)}>
       <a
+        rel="noopener noreferrer"
         href={href}
         onPointerEnter={() => onIntent?.(true)}
         onPointerLeave={() => onIntent?.(false)}
@@ -71,27 +58,28 @@ export function DownloadButton({
         {text.button}
       </a>
       <p className="text-sm text-lunar-text-2">{text.details}</p>
-      {!windows && (
-        <div
-          data-testid="not-windows"
-          className="flex max-w-sm flex-col items-center gap-2 text-center text-sm text-lunar-text-2"
+      {/* Hidden on Windows desktops. The head script marks everyone else before the first paint
+          ("Windows NT" in the user agent covers Windows 10 and 11); a wrong guess only shows or
+          hides this note, the download always works. */}
+      <div
+        data-testid="not-windows"
+        className="hidden max-w-sm flex-col items-center gap-2 text-center text-sm text-lunar-text-2 in-data-[platform=other]:flex"
+      >
+        <p className="flex items-start gap-2 text-left">
+          <Monitor className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+          {text.notWindows}
+        </p>
+        <button
+          type="button"
+          onClick={copy}
+          className="min-h-11 rounded-full border border-lunar-border px-4 font-medium text-lunar-text hover:bg-lunar-surface"
         >
-          <p className="flex items-start gap-2 text-left">
-            <Monitor className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-            {text.notWindows}
-          </p>
-          <button
-            type="button"
-            onClick={copy}
-            className="min-h-11 rounded-full border border-lunar-border px-4 font-medium text-lunar-text hover:bg-lunar-surface"
-          >
-            {copied ? text.copied : text.copy}
-          </button>
-          <span className="sr-only" aria-live="polite">
-            {copied ? text.copied : ""}
-          </span>
-        </div>
-      )}
+          {copied ? text.copied : text.copy}
+        </button>
+        <span className="sr-only" aria-live="polite">
+          {copied ? text.copied : ""}
+        </span>
+      </div>
     </div>
   );
 }

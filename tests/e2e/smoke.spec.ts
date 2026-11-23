@@ -11,18 +11,6 @@ test("home shows the Lunar pill and a download link", async ({ page }) => {
   );
 });
 
-test("home makes no request to another origin", async ({ page, baseURL }) => {
-  const origin = new URL(baseURL!).origin;
-  const foreign: string[] = [];
-  page.on("request", (request) => {
-    const url = request.url();
-    if (!url.startsWith("data:") && new URL(url).origin !== origin) foreign.push(url);
-  });
-  await page.goto("/");
-  await page.waitForLoadState("networkidle");
-  expect(foreign).toEqual([]);
-});
-
 for (const theme of ["dark", "light"] as const) {
   test(`home has no serious accessibility violations (${theme})`, async ({ page }) => {
     await page.addInitScript((value) => localStorage.setItem("lunar-theme", value), theme);

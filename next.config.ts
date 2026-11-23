@@ -29,4 +29,10 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default createNextIntlPlugin("./src/i18n/request.ts")(nextConfig);
+// Messages are compiled at build time, so the browser gets no ICU message parser.
+export default createNextIntlPlugin({
+  requestConfig: "./src/i18n/request.ts",
+  experimental: {
+    messages: { format: "json", path: "./messages", locales: "infer", precompile: true },
+  },
+})(nextConfig);

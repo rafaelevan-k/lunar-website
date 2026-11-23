@@ -24,6 +24,14 @@ async function withoutWebGL(page: Page) {
 }
 
 async function goToWhy(page: Page) {
+  // After hydration: the pinned tour above makes the page taller once it takes over (it stays
+  // plain with reduced motion).
+  await page.waitForFunction(
+    () =>
+      document.querySelector("[data-tour=pinned]") ||
+      document.documentElement.dataset.motion === "reduce" ||
+      matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   await page.evaluate(() => {
     const h = document.getElementById("why-lunar")!;
     window.scrollTo(0, h.getBoundingClientRect().top + window.scrollY - 100);

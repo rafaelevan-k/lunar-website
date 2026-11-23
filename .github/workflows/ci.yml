@@ -1,0 +1,59 @@
+name: CI
+
+# Every push to main and every pull request: the same checks as before a commit, then the
+# end-to-end tests and Lighthouse against the production build.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # Only raises GitHub's rate limit for the release data read at build time.
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run typecheck
+      - run: npm run build
+
+      - name: First-load JavaScript budget
+        run: npm run check:js
+
+      - name: Install Playwright's Chromium
+        run: npx playwright install --with-deps chromium
+
+      - run: npm run test:e2e
+
+      - name: Lighthouse (mobile)
+        run: npm run lighthouse
+
+      - name: Keep the reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: |
+            playwright-report/
+            test-results/
+            .lighthouseci/
+          retention-days: 14
+          if-no-files-found: ignore

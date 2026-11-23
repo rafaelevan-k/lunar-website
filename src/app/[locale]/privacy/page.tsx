@@ -104,6 +104,7 @@ export default async function PrivacyPage() {
         </h2>
         <p className="mt-4 max-w-2xl text-lunar-text-2">{p.thisSite}</p>
         <a
+          rel="noopener noreferrer"
           href={fullNotice}
           className="mt-8 inline-flex min-h-11 items-center gap-1.5 rounded-full border border-lunar-border px-5 font-medium hover:bg-lunar-surface"
         >

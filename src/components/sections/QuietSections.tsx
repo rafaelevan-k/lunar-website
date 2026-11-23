@@ -32,6 +32,7 @@ export async function OpenSource({ body, stack }: { body: string; stack: string 
       <p className="mt-4 max-w-2xl text-lg text-lunar-text-2">{body}</p>
       <p className="mt-2 max-w-2xl text-lunar-text-2">{stack}</p>
       <a
+        rel="noopener noreferrer"
         href={LUNAR_REPO_URL}
         className="mt-8 inline-flex min-h-11 items-center gap-1.5 rounded-full border border-lunar-border px-5 font-medium hover:bg-lunar-surface"
       >

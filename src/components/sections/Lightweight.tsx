@@ -1,6 +1,6 @@
 "use client";
 
-import { animate, useInView } from "motion/react";
+import { animateSingleValue, useInView } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/components/motion/ReducedMotionProvider";
@@ -24,7 +24,7 @@ function CountUp({ to, decimals, suffix }: { to: number; decimals: number; suffi
 
   useEffect(() => {
     if (!inView || reduced) return;
-    const controls = animate(0, to, {
+    const controls = animateSingleValue(0, to, {
       duration: 1.4,
       ease: "easeOut",
       onUpdate: (v) => setText(format(v)),

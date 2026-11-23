@@ -6,9 +6,12 @@ import { readReducedMotion, subscribePreferences } from "@/lib/preferences";
 
 const ReducedMotionContext = createContext(false);
 
-// The server can't know the visitor's setting. Render as reduced until the browser says otherwise,
-// so nothing starts moving before we know it may.
-const getServerSnapshot = () => true;
+// The server can't know the visitor's setting, so it renders the moving version, which most
+// visitors get. Nothing moves before hydration anyway (Motion animates from JavaScript, and CSS
+// animations follow the setting through globals.css). Rendering "reduced" first made React re-render
+// the whole page right after hydrating it, the biggest cost on phones. Visitors who want less motion
+// get that re-render instead, once.
+const getServerSnapshot = () => false;
 
 export function ReducedMotionProvider({ children }: { children: ReactNode }) {
   const reduced = useSyncExternalStore(subscribePreferences, readReducedMotion, getServerSnapshot);
