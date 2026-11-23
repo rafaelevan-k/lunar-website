@@ -9,3 +9,9 @@ export const NAV_LINKS = [
   { href: "/privacy", key: "privacy" },
   { href: "/changelog", key: "changelog" },
 ] as const;
+
+/**
+ * Google Search Console ownership check (HTML tag method) for https://lunar-rafaelevank.vercel.app/.
+ * Public by design: Google reads it from the page. Keep it, or the site stops being verified.
+ */
+export const GOOGLE_SITE_VERIFICATION = "yCgjfIcrPtMnqUIbR7zWh411FYxo72Bo-7fU_0GCZX4";
