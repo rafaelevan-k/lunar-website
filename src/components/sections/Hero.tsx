@@ -1,11 +1,11 @@
 "use client";
 
-import { Check } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import type { LunarEyesHandle } from "@/components/lunar/LunarEyes";
 import { LunarPill } from "@/components/lunar/LunarPill";
 import { useReducedMotion } from "@/components/motion/ReducedMotionProvider";
+import { TypedFacts } from "@/components/motion/TypedFacts";
 import { DownloadButton, type DownloadButtonText } from "@/components/ui/DownloadButton";
 
 /*
@@ -82,7 +82,7 @@ export function Hero({
           <LunarPill
             label={pillAction}
             onClick={() => eyes.current?.celebrate()}
-            className="w-72 sm:w-96"
+            className="w-[clamp(18rem,40svh,24rem)]"
             eyes={{ ref: eyes, gaze: "page", smile: eager, feedback: true, wake: true }}
           />
         </motion.div>
@@ -90,29 +90,30 @@ export function Hero({
 
       <h1
         id="hero-title"
-        className="mt-10 max-w-[14ch] text-[clamp(2.75rem,8.5vw,6.25rem)] leading-[0.95] font-bold tracking-[-0.035em] font-stretch-[84%]"
+        className="mt-8 max-w-[14ch] text-[clamp(2.75rem,min(8.5vw,11svh),6.25rem)] leading-[0.95] font-bold tracking-[-0.035em] font-stretch-[84%]"
       >
         {title}
       </h1>
-      <p className="mt-5 max-w-[38rem] text-lg leading-relaxed text-lunar-text-2 sm:text-xl">
-        {lead}
-      </p>
+      {/* Phones: text, button, facts in one column. Wide screens: text and facts on the left, the
+          notepad on the right, so the button stays on the first screen. */}
+      <div className="mt-5 flex flex-col items-center lg:mt-10 lg:grid lg:max-w-5xl lg:grid-cols-[minmax(0,32rem)_auto] lg:items-center lg:gap-x-16 lg:text-left">
+        <p className="max-w-[38rem] text-lg leading-relaxed text-lunar-text-2 sm:text-xl lg:col-start-1 lg:row-start-1 lg:self-end">
+          {lead}
+        </p>
 
-      <DownloadButton
-        className="mt-8"
-        href={downloadHref}
-        text={downloadText}
-        onIntent={setEager}
-      />
+        <DownloadButton
+          className="mt-8 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0"
+          tilt
+          href={downloadHref}
+          text={downloadText}
+          onIntent={setEager}
+        />
 
-      <ul className="mt-10 flex max-w-2xl flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-lunar-text-2">
-        {facts.map((fact) => (
-          <li key={fact} className="flex items-center gap-1.5">
-            <Check className="size-3.5" strokeWidth={2.4} aria-hidden="true" />
-            {fact}
-          </li>
-        ))}
-      </ul>
+        <TypedFacts
+          facts={facts}
+          className="mt-10 min-h-7 text-base text-lunar-text-2 sm:text-lg lg:col-start-1 lg:row-start-2 lg:mt-5 lg:self-start"
+        />
+      </div>
     </section>
   );
 }

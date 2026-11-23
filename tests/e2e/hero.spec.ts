@@ -11,8 +11,29 @@ test.describe("hero", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(en.hero.title);
     const hero = page.locator("section[aria-labelledby=hero-title]");
     await expect(hero.getByText(en.hero.lead)).toBeVisible();
+    // Every fact is in a list for screen readers; the typed line starts with the first in full.
     for (const fact of en.hero.facts) {
-      await expect(hero.getByText(fact, { exact: true })).toBeVisible();
+      await expect(hero.getByRole("listitem").filter({ hasText: fact })).toHaveCount(1);
+    }
+    await expect(hero.locator("[data-typed-fact]")).toHaveText(en.hero.facts[0]);
+  });
+
+  test("the facts are typed one after another", async ({ page }) => {
+    await page.goto("/en");
+    const line = page.locator("section[aria-labelledby=hero-title] [data-typed-fact]");
+    await expect(line).toHaveText(en.hero.facts[0]);
+    // It types only while on screen (on phones the line starts below the fold).
+    await line.scrollIntoViewIfNeeded();
+    await expect(line).toHaveText(en.hero.facts[1], { timeout: 8_000 });
+  });
+
+  test("with reduced motion all facts show at once, nothing is typed", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/en");
+    const hero = page.locator("section[aria-labelledby=hero-title]");
+    await expect(hero.locator("[data-typed-fact]")).toHaveCount(0);
+    for (const fact of en.hero.facts) {
+      await expect(hero.getByText(fact, { exact: true }).last()).toBeVisible();
     }
   });
 

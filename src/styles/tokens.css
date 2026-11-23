@@ -39,6 +39,20 @@
   /* Site token: the chosen option of a segmented control. */
   --toggle-on-bg: var(--lunar-surface);
   --toggle-on-text: var(--lunar-text);
+  /* Site tokens: the download button as a spiral notepad with a sticky note (owner request,
+     2026-11-23). Paper colours, the same in both themes, like the island. */
+  --notepad-page: #f7f6f1;
+  --notepad-page-2: #e9e7df;
+  --notepad-page-3: #d8d5cb;
+  --notepad-back: #2b2d35;
+  --notepad-ink: #15161b;
+  --notepad-hole: #1d1f26;
+  --notepad-ring-light: #e8eaef;
+  --notepad-ring-dark: #7c808c;
+  --notepad-shadow: color-mix(in srgb, #000 35%, transparent);
+  --sticky-note: #ffe36e;
+  --sticky-note-ink: #3a2f05;
+  --sticky-tape: color-mix(in srgb, #fff 55%, transparent);
   /* Site token: the soft moonlight behind the hero pill. */
   --hero-halo: color-mix(in srgb, #f6f7fb 12%, transparent);
   /* Site token: the text part of the Why Lunar cards (dark theme: the island's surface). */
