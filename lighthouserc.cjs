@@ -37,8 +37,10 @@ module.exports = {
           "error",
           { maxNumericValue: 0.05, aggregationMethod: "median-run" },
         ],
-        // Lab stand-in for INP, which needs a real visitor.
-        "total-blocking-time": ["error", { maxNumericValue: 200, aggregationMethod: "median-run" }],
+        // Lab stand-in for INP, which needs a real visitor. A warning, not a failure (owner decision,
+        // 2026-11-23): it swings 150–464 ms between identical runs and already counts toward the
+        // Performance score above, which stays an error.
+        "total-blocking-time": ["warn", { maxNumericValue: 200, aggregationMethod: "median-run" }],
       },
     },
     upload: { target: "filesystem", outputDir: ".lighthouseci/reports" },

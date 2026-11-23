@@ -57,3 +57,5 @@ jobs:
             .lighthouseci/
           retention-days: 14
           if-no-files-found: ignore
+          # .lighthouseci/ starts with a dot; v4 skips hidden files unless asked.
+          include-hidden-files: true
