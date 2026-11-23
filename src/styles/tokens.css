@@ -23,7 +23,18 @@
   /* Site token: a sample desktop wallpaper behind island mockups, so the dark island reads. */
   /* Site token: the blue of the simplified SmartScreen drawing on the install section. */
   --sample-smartscreen: #1f4e8c;
-  --sample-wallpaper: linear-gradient(165deg, #273049 0%, #3d3a63 45%, #8a6a7c 80%, #c4927a 100%);
+  /* Its colour stops are separate so the Why Lunar 3D cards can paint the same gradient. */
+  --sample-wallpaper-1: #273049;
+  --sample-wallpaper-2: #3d3a63;
+  --sample-wallpaper-3: #8a6a7c;
+  --sample-wallpaper-4: #c4927a;
+  --sample-wallpaper: linear-gradient(
+    165deg,
+    var(--sample-wallpaper-1) 0%,
+    var(--sample-wallpaper-2) 45%,
+    var(--sample-wallpaper-3) 80%,
+    var(--sample-wallpaper-4) 100%
+  );
 
   /* Site token: the chosen option of a segmented control. */
   --toggle-on-bg: var(--lunar-surface);

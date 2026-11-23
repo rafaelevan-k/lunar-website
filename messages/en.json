@@ -153,7 +153,15 @@
   },
   "Why": {
     "title": "Why Lunar",
-    "open": "More about {title}",
+    "carousel": "carousel",
+    "slide": "reason",
+    "position": "{n} of {total}",
+    "open": "Read more about {title}",
+    "more": "Read more",
+    "previous": "Previous reason",
+    "next": "Next reason",
+    "pause": "Stop turning on its own",
+    "play": "Turn on its own",
     "close": "Close"
   },
   "Sections": {

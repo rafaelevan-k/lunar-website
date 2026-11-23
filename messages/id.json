@@ -153,7 +153,15 @@
   },
   "Why": {
     "title": "Kenapa Lunar",
-    "open": "Selengkapnya tentang {title}",
+    "carousel": "korsel",
+    "slide": "alasan",
+    "position": "{n} dari {total}",
+    "open": "Baca selengkapnya tentang {title}",
+    "more": "Baca selengkapnya",
+    "previous": "Alasan sebelumnya",
+    "next": "Alasan berikutnya",
+    "pause": "Hentikan putaran otomatis",
+    "play": "Putar otomatis",
     "close": "Tutup"
   },
   "Sections": {
