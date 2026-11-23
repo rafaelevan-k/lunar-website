@@ -31,7 +31,7 @@ test.describe("island panel", () => {
 
   test("only the current page is reachable; the others are inert", async ({ page }) => {
     await page.goto("/en");
-    const panels = page.locator('[role="tabpanel"]');
+    const panels = page.locator('[data-tour] [role="tabpanel"]');
     await expect(panels).toHaveCount(6);
     await expect(panels.nth(0)).not.toHaveAttribute("inert");
     await expect(panels.nth(1)).toHaveAttribute("inert");
@@ -40,7 +40,11 @@ test.describe("island panel", () => {
 
   test("the Notch style puts the pages as named tabs along the top", async ({ page }) => {
     await page.goto("/en");
-    await page.getByRole("group", { name: "Island style" }).getByText("Notch").click();
+    await page
+      .locator("[data-tour]")
+      .getByRole("group", { name: "Island style" })
+      .getByText("Notch")
+      .click();
     await expect(page.locator("[data-island-style]")).toHaveAttribute("data-island-style", "notch");
     const tabs = page.getByRole("tablist", { name: "Pages" }).getByRole("tab");
     await expect(tabs.nth(0)).toHaveAccessibleName("System");
@@ -51,7 +55,11 @@ test.describe("island panel", () => {
 
   test("Indonesian names come from the app", async ({ page }) => {
     await page.goto("/id");
-    await page.getByRole("group", { name: "Gaya pulau" }).getByText("Notch").click();
+    await page
+      .locator("[data-tour]")
+      .getByRole("group", { name: "Gaya pulau" })
+      .getByText("Notch")
+      .click();
     const tabs = page.getByRole("tablist", { name: "Halaman" }).getByRole("tab");
     await expect(tabs.nth(3)).toHaveAccessibleName("Pengonversi berkas");
   });
@@ -65,28 +73,62 @@ test.describe("closed island", () => {
         els.map((el) => [el.getAttribute("data-activity"), el.clientWidth, el.clientHeight]),
       );
 
-  test("each activity is shown at the app's Pill size", async ({ page }) => {
+  test("each activity is shown at the app's sizes, in both styles", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/en");
-    // Polled: right after the page loads the elements can still report 0 while layout settles.
-    await expect
-      .poll(() => sizes(page, "section[aria-labelledby=island-activities]"))
-      .toEqual([
-        ["eyes", 160, 44],
-        ["media", 160, 44],
-        ["recording", 232, 44],
-        ["focus", 160, 44],
-      ]);
-    await expect(page.getByRole("img", { name: "Voice recorder" })).toBeVisible();
+    const live = page.locator("section[aria-labelledby=live-island]");
+    const size = () =>
+      live
+        .locator("[data-activity]")
+        .first()
+        .evaluate((el) => [el.getAttribute("data-activity"), el.clientWidth, el.clientHeight]);
+    const expected = {
+      pill: {
+        Music: ["media", 160, 44],
+        Recording: ["recording", 232, 44],
+        Focus: ["focus", 160, 44],
+        "Focus done": ["eyes", 160, 44],
+      },
+      notch: {
+        Music: ["media", 280, 32],
+        Recording: ["recording", 300, 32],
+        Focus: ["focus", 230, 32],
+        "Focus done": ["eyes", 230, 32],
+      },
+    } as const;
+    for (const style of ["Pill", "Notch"] as const) {
+      await live
+        .getByRole("group", { name: "Island style" })
+        .getByText(style, { exact: true })
+        .click();
+      for (const [moment, want] of Object.entries(expected[style === "Pill" ? "pill" : "notch"])) {
+        await live
+          .getByRole("group", { name: "Activity" })
+          .getByText(moment, { exact: true })
+          .click();
+        await expect.poll(size).toEqual(want);
+      }
+    }
   });
 
   test("the closed Notch in the tour is the app's Notch size", async ({ page }) => {
     await page.goto("/en");
     await expect(page.locator("[data-tour=pinned]")).toBeAttached();
-    await page.getByRole("group", { name: "Island style" }).getByText("Notch").click();
+    await page
+      .locator("[data-tour]")
+      .getByRole("group", { name: "Island style" })
+      .getByText("Notch")
+      .click();
     await expect.poll(() => sizes(page, "[data-tour]")).toEqual([["eyes", 230, 32]]);
   });
 
   // The bars start "reduced" on the first render; they must start moving after a full page load.
+  const showRecording = (page: Page) =>
+    page
+      .locator("section[aria-labelledby=live-island]")
+      .getByRole("group", { name: "Activity" })
+      .getByText("Recording", { exact: true })
+      .click();
   const barScales = (page: Page) =>
     page
       .locator("[data-activity=recording] span.bg-lunar-recording")
@@ -103,6 +145,7 @@ test.describe("closed island", () => {
   test("the sound bars move after a full page load", async ({ page }) => {
     await page.goto("/en");
     await page.waitForLoadState("networkidle");
+    await showRecording(page);
     expect(await barScales(page)).toBeGreaterThan(2);
   });
 
@@ -110,6 +153,7 @@ test.describe("closed island", () => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/en");
     await page.waitForLoadState("networkidle");
+    await showRecording(page);
     expect(await barScales(page)).toBe(1);
   });
 });

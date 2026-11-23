@@ -137,10 +137,7 @@
       "stop": "Stop and save the recording"
     },
     "preview": {
-      "title": "Meet the island",
-      "lead": "Click a page, use the arrows, or switch the style. They are redrawn from Lunar's own panels.",
-      "activitiesTitle": "While something is happening",
-      "activitiesLead": "The closed island shows the music, the recording or the focus timer."
+      "title": "Meet the island"
     },
     "tour": {
       "lead": "Click the eyes, then swipe or use the arrow keys to move between six pages. Scroll to walk through them here.",
@@ -158,5 +155,83 @@
     "title": "Why Lunar",
     "open": "More about {title}",
     "close": "Close"
+  },
+  "Sections": {
+    "live": {
+      "title": "The island shows what's happening",
+      "lead": "While something is going on, the closed island turns into it. Pick one, or let it play.",
+      "activity": "Activity",
+      "music": "Music",
+      "recording": "Recording",
+      "focus": "Focus",
+      "done": "Focus done",
+      "style": "Island style",
+      "autoplay": "Playing by itself. Pick one to stop."
+    },
+    "share": {
+      "title": "Invisible in screen shares",
+      "lead": "Drag the line. On your screen Lunar is right there; in Teams, Zoom or Meet nobody else sees it.",
+      "yours": "Your screen",
+      "theirs": "What they see",
+      "slider": "Compare your screen with what others see",
+      "meeting": "Weekly sync",
+      "notes": "Notes: ask about the launch date"
+    },
+    "translate": {
+      "title": "Translate your screen in place",
+      "lead": "Press Ctrl+Alt+T and the text on your screen is shown in another language, right over the original. Try it here.",
+      "button": "Translate the screen",
+      "shortcut": "or press Ctrl+Alt+T",
+      "original": "Original",
+      "to": "Show in",
+      "note": "Machine translation can be wrong. In Lunar the text is read on your PC; only the text goes to Azure, with your own key."
+    },
+    "light": {
+      "title": "Light as a feather",
+      "cpu": "CPU while idle",
+      "memory": "private memory",
+      "source": "Measured over five minutes on a typical laptop."
+    },
+    "whatsNew": {
+      "title": "New in {version}",
+      "releaseNotes": "Read the release notes"
+    },
+    "privacy": {
+      "title": "Your privacy",
+      "map": "What leaves your PC",
+      "pc": "Your PC",
+      "github": "GitHub",
+      "anthropic": "Anthropic",
+      "azure": "Microsoft Azure",
+      "off": "Off until you turn it on",
+      "daily": "Once a day, can be turned off",
+      "onAsk": "Only when you ask"
+    },
+    "install": {
+      "title": "Install in a minute",
+      "smartTitle": "If Windows warns you",
+      "smartDialog": "Windows protected your PC",
+      "smartBody": "Microsoft Defender SmartScreen prevented an unrecognised app from starting.",
+      "moreInfo": "More info",
+      "runAnyway": "Run anyway",
+      "illustration": "A simplified drawing of the warning, not the real window.",
+      "copy": "Copy",
+      "copied": "Copied",
+      "checksum": "Expected SHA-256 for Lunar {version}"
+    },
+    "limits": {
+      "title": "Good to know"
+    },
+    "open": {
+      "title": "Open source",
+      "cta": "See the code on GitHub"
+    },
+    "faq": {
+      "title": "Questions"
+    },
+    "cta": {
+      "title": "Give your desktop a pair of eyes",
+      "lead": "Free, small, and it stays out of your way."
+    }
   }
 }

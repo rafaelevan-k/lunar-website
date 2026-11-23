@@ -137,10 +137,7 @@
       "stop": "Hentikan dan simpan rekaman"
     },
     "preview": {
-      "title": "Kenali pulaunya",
-      "lead": "Klik sebuah halaman, pakai panah, atau ganti gayanya. Semuanya digambar ulang dari panel Lunar sendiri.",
-      "activitiesTitle": "Saat sesuatu sedang berjalan",
-      "activitiesLead": "Pulau yang tertutup menampilkan musik, rekaman, atau timer fokus."
+      "title": "Kenali pulaunya"
     },
     "tour": {
       "lead": "Klik matanya, lalu geser atau pakai tombol panah untuk berpindah di antara enam halaman. Scroll untuk menjelajahinya di sini.",
@@ -158,5 +155,83 @@
     "title": "Kenapa Lunar",
     "open": "Selengkapnya tentang {title}",
     "close": "Tutup"
+  },
+  "Sections": {
+    "live": {
+      "title": "Pulau menunjukkan apa yang terjadi",
+      "lead": "Saat sesuatu sedang berjalan, pulau yang tertutup berubah menjadi itu. Pilih salah satu, atau biarkan berganti sendiri.",
+      "activity": "Aktivitas",
+      "music": "Musik",
+      "recording": "Merekam",
+      "focus": "Fokus",
+      "done": "Fokus selesai",
+      "style": "Gaya pulau",
+      "autoplay": "Berganti sendiri. Pilih salah satu untuk berhenti."
+    },
+    "share": {
+      "title": "Tak terlihat saat berbagi layar",
+      "lead": "Geser garisnya. Di layar Anda Lunar tetap ada; di Teams, Zoom, atau Meet tidak ada orang lain yang melihatnya.",
+      "yours": "Layar Anda",
+      "theirs": "Yang mereka lihat",
+      "slider": "Bandingkan layar Anda dengan yang dilihat orang lain",
+      "meeting": "Rapat mingguan",
+      "notes": "Catatan: tanyakan tanggal peluncuran"
+    },
+    "translate": {
+      "title": "Terjemahkan layar di tempat",
+      "lead": "Tekan Ctrl+Alt+T dan teks di layar Anda ditampilkan dalam bahasa lain, tepat di atas teks aslinya. Coba di sini.",
+      "button": "Terjemahkan layar",
+      "shortcut": "atau tekan Ctrl+Alt+T",
+      "original": "Asli",
+      "to": "Tampilkan dalam",
+      "note": "Terjemahan mesin bisa salah. Di Lunar teks dibaca di PC Anda; hanya teksnya yang dikirim ke Azure, dengan kunci Anda sendiri."
+    },
+    "light": {
+      "title": "Ringan sekali",
+      "cpu": "CPU saat diam",
+      "memory": "memori pribadi",
+      "source": "Diukur selama lima menit di laptop biasa."
+    },
+    "whatsNew": {
+      "title": "Baru di {version}",
+      "releaseNotes": "Baca catatan rilis"
+    },
+    "privacy": {
+      "title": "Privasi Anda",
+      "map": "Apa yang keluar dari PC Anda",
+      "pc": "PC Anda",
+      "github": "GitHub",
+      "anthropic": "Anthropic",
+      "azure": "Microsoft Azure",
+      "off": "Mati sampai Anda menyalakannya",
+      "daily": "Sekali sehari, bisa dimatikan",
+      "onAsk": "Hanya saat Anda meminta"
+    },
+    "install": {
+      "title": "Pasang dalam semenit",
+      "smartTitle": "Jika Windows memberi peringatan",
+      "smartDialog": "Windows protected your PC",
+      "smartBody": "Microsoft Defender SmartScreen prevented an unrecognised app from starting.",
+      "moreInfo": "More info",
+      "runAnyway": "Run anyway",
+      "illustration": "Gambar sederhana dari peringatan itu, bukan jendela aslinya.",
+      "copy": "Salin",
+      "copied": "Tersalin",
+      "checksum": "SHA-256 yang benar untuk Lunar {version}"
+    },
+    "limits": {
+      "title": "Perlu diketahui"
+    },
+    "open": {
+      "title": "Open source",
+      "cta": "Lihat kodenya di GitHub"
+    },
+    "faq": {
+      "title": "Pertanyaan"
+    },
+    "cta": {
+      "title": "Beri desktop Anda sepasang mata",
+      "lead": "Gratis, kecil, dan tidak mengganggu."
+    }
   }
 }

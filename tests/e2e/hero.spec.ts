@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { en } from "../../src/content/en";
 
 const heroPill = (page: Page) =>
-  page.getByRole("button", { name: "Make Lunar smile" }).locator("xpath=..");
+  page.getByRole("button", { name: "Make Lunar smile" }).first().locator("xpath=..");
 const heroLid = (page: Page) => page.locator("main svg[data-wake]").getAttribute("data-lid");
 
 test.describe("hero", () => {
@@ -20,7 +20,7 @@ test.describe("hero", () => {
     test.skip(isMobile, "Desktop size");
     await page.setViewportSize({ width: 1366, height: 768 });
     await page.goto("/en");
-    const link = page.getByRole("link", { name: "Download Lunar for Windows 11" });
+    const link = page.getByRole("link", { name: "Download Lunar for Windows 11" }).first();
     await expect(link).toBeVisible();
     // Measure the final layout: the heading font swaps in after the first paint.
     await page.evaluate(() => document.fonts.ready);
@@ -59,10 +59,9 @@ test.describe("hero", () => {
     await page.goto("/en");
     const lid = page.locator('main svg[data-wake] [data-part="lid"]').first();
     expect(await lid.evaluate((el) => getComputedStyle(el).transform)).toBe("none");
-    await expect(page.getByRole("link", { name: "Download Lunar for Windows 11" })).toHaveAttribute(
-      "href",
-      /Lunar\.msi$/,
-    );
+    await expect(
+      page.getByRole("link", { name: "Download Lunar for Windows 11" }).first(),
+    ).toHaveAttribute("href", /Lunar\.msi$/);
     await context.close();
   });
 });

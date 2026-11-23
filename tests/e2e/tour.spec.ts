@@ -48,7 +48,11 @@ test.describe("Meet the island (pinned)", () => {
   }) => {
     await page.goto("/en");
     await page.locator("[data-tour-pin]").waitFor({ state: "attached" });
-    await page.getByRole("group", { name: "Island style" }).getByText("Notch").click();
+    await page
+      .locator("[data-tour]")
+      .getByRole("group", { name: "Island style" })
+      .getByText("Notch")
+      .click();
     await scrollTour(page, 0);
     // The panel body (background, tabs, pages) is the first child of the island element.
     const bodyOpacity = () =>
@@ -69,7 +73,7 @@ test.describe("Meet the island (pinned)", () => {
     // Past the end of the pinned scroll the panel is released and scrolls up with the page; measure
     // there, with the next heading halfway down the screen.
     await page.evaluate(() => {
-      const next = document.getElementById("island-activities")!;
+      const next = document.getElementById("live-island")!;
       window.scrollTo(0, next.getBoundingClientRect().top + window.scrollY - 500);
     });
     await page.waitForTimeout(300);
@@ -77,7 +81,7 @@ test.describe("Meet the island (pinned)", () => {
       const desktop = document
         .querySelector("[data-tour] [data-island-style]")!
         .closest("[class*='rounded-[28px]']")!;
-      const next = document.getElementById("island-activities")!;
+      const next = document.getElementById("live-island")!;
       return next.getBoundingClientRect().top - desktop.getBoundingClientRect().bottom;
     });
     expect(gap).toBeLessThan(150);

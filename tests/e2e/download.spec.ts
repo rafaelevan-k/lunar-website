@@ -11,19 +11,22 @@ const DOWNLOAD = "https://github.com/rafaelevan-k/lunar/releases/latest/download
 
 test("the main button downloads the newest Lunar.msi and says which one", async ({ page }) => {
   await page.goto("/en");
-  const button = page.getByRole("link", { name: "Download Lunar for Windows 11" });
+  const button = page.getByRole("link", { name: "Download Lunar for Windows 11" }).first();
   await expect(button).toHaveAttribute("href", DOWNLOAD);
   const size = (release.sizeBytes / 1024 / 1024).toFixed(1);
-  await expect(page.getByText(`Lunar ${release.version}, ${size} MB, released`)).toBeVisible();
+  await expect(
+    page.getByText(`Lunar ${release.version}, ${size} MB, released`).first(),
+  ).toBeVisible();
 });
 
 test("the Indonesian page formats the same facts in Indonesian", async ({ page }) => {
   await page.goto("/id");
-  await expect(page.getByRole("link", { name: "Unduh Lunar untuk Windows 11" })).toHaveAttribute(
-    "href",
-    DOWNLOAD,
-  );
-  await expect(page.getByText(new RegExp(`Lunar ${release.version}, .+ MB, rilis`))).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Unduh Lunar untuk Windows 11" }).first(),
+  ).toHaveAttribute("href", DOWNLOAD);
+  await expect(
+    page.getByText(new RegExp(`Lunar ${release.version}, .+ MB, rilis`)).first(),
+  ).toBeVisible();
 });
 
 test("on Windows there is no note; elsewhere the note and a copy button appear", async ({
@@ -32,7 +35,7 @@ test("on Windows there is no note; elsewhere the note and a copy button appear",
   browserName,
 }) => {
   await page.goto("/en");
-  const note = page.getByTestId("not-windows");
+  const note = page.getByTestId("not-windows").first();
   if (!isMobile) {
     await expect(note).toHaveCount(0);
     return;

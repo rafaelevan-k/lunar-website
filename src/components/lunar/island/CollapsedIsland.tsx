@@ -17,10 +17,13 @@ export function CollapsedIsland({
   islandStyle,
   activity,
   className,
+  smile = false,
 }: {
   islandStyle: IslandStyle;
   activity: Activity;
   className?: string;
+  /** For "eyes": smile, as when a focus session is over. */
+  smile?: boolean;
 }) {
   const t = useTranslations("Island.activity");
   const width = SIZES[islandStyle].idleWidth[activity];
@@ -49,7 +52,7 @@ export function CollapsedIsland({
       >
         {activity === "eyes" && (
           <div className="flex h-5 w-full justify-center">
-            <LunarEyes />
+            <LunarEyes smile={smile} />
           </div>
         )}
         {activity === "media" && (

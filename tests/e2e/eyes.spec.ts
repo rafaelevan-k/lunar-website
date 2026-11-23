@@ -18,7 +18,10 @@ test.describe("Lunar's eyes", () => {
     // The hero eyes open once the page is hydrated and they are on screen; only then is the
     // pointer followed.
     await expect(heroEyes(page)).toHaveAttribute("data-lid", "0.00");
-    const box = (await page.getByRole("button", { name: "Make Lunar smile" }).boundingBox())!;
+    const box = (await page
+      .getByRole("button", { name: "Make Lunar smile" })
+      .first()
+      .boundingBox())!;
     await page.mouse.move(box.x + box.width + 300, box.y + box.height / 2);
     await expect.poll(() => pupilX(page)).toBeGreaterThan(3);
     await page.mouse.move(box.x - 300, box.y + box.height / 2);
@@ -28,15 +31,15 @@ test.describe("Lunar's eyes", () => {
   test("they smile while the download button has focus", async ({ page }) => {
     await page.goto("/en");
     await expect(heroEyes(page)).toHaveAttribute("data-smiling", "false");
-    await page.getByRole("link", { name: "Download Lunar for Windows 11" }).focus();
+    await page.getByRole("link", { name: "Download Lunar for Windows 11" }).first().focus();
     await expect(heroEyes(page)).toHaveAttribute("data-smiling", "true");
-    await page.getByRole("link", { name: "Download Lunar for Windows 11" }).blur();
+    await page.getByRole("link", { name: "Download Lunar for Windows 11" }).first().blur();
     await expect(heroEyes(page)).toHaveAttribute("data-smiling", "false");
   });
 
   test("clicking the pill makes them smile for a moment", async ({ page }) => {
     await page.goto("/en");
-    await page.getByRole("button", { name: "Make Lunar smile" }).click();
+    await page.getByRole("button", { name: "Make Lunar smile" }).first().click();
     await expect(heroEyes(page)).toHaveAttribute("data-smiling", "true");
     await expect(heroEyes(page)).toHaveAttribute("data-smiling", "false", { timeout: 3000 });
   });
@@ -53,7 +56,10 @@ test.describe("Lunar's eyes", () => {
   test("with reduced motion they neither follow the pointer nor blink", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/en");
-    const box = (await page.getByRole("button", { name: "Make Lunar smile" }).boundingBox())!;
+    const box = (await page
+      .getByRole("button", { name: "Make Lunar smile" })
+      .first()
+      .boundingBox())!;
     await page.mouse.move(box.x + box.width + 300, box.y);
     const lids: number[] = [];
     for (let i = 0; i < 16; i++) {

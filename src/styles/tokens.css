@@ -21,6 +21,8 @@
   --lunar-radius-panel: 24px;
 
   /* Site token: a sample desktop wallpaper behind island mockups, so the dark island reads. */
+  /* Site token: the blue of the simplified SmartScreen drawing on the install section. */
+  --sample-smartscreen: #1f4e8c;
   --sample-wallpaper: linear-gradient(165deg, #273049 0%, #3d3a63 45%, #8a6a7c 80%, #c4927a 100%);
 
   /* Site token: the chosen option of a segmented control. */
