@@ -4,17 +4,14 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { PageIntro } from "@/components/pages/PageIntro";
 import { getContent } from "@/content";
 import { LUNAR_REPO_URL } from "@/content/site";
-import { alternatesFor } from "@/i18n/alternates";
 import type { Locale } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/metadata";
 import { formatReleaseDate } from "@/lib/release";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
   const t = await getTranslations("Pages.changelog");
-  return {
-    title: `${t("title")} — Lunar`,
-    description: t("lead"),
-    alternates: alternatesFor("/changelog", await getLocale()),
-  };
+  return pageMetadata({ path: "/changelog", locale, title: t("title"), description: t("lead") });
 }
 
 /** Every public release, newest first, as a timeline (a real sequence, so it is an ordered list). */

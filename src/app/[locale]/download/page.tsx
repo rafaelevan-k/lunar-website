@@ -6,18 +6,15 @@ import { Install } from "@/components/sections/Install";
 import { DownloadButton } from "@/components/ui/DownloadButton";
 import { getContent } from "@/content";
 import { LUNAR_REPO_URL } from "@/content/site";
-import { alternatesFor } from "@/i18n/alternates";
 import type { Locale } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/metadata";
 import { downloadButtonText } from "@/lib/download-text";
 import { DOWNLOAD_URL, formatReleaseDate, formatSize, getRelease } from "@/lib/release";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
   const t = await getTranslations("Pages.download");
-  return {
-    title: `${t("title")} — Lunar`,
-    description: t("lead"),
-    alternates: alternatesFor("/download", await getLocale()),
-  };
+  return pageMetadata({ path: "/download", locale, title: t("title"), description: t("lead") });
 }
 
 export default async function DownloadPage() {

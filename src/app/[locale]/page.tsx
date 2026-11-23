@@ -13,13 +13,13 @@ import { TranslateDemo } from "@/components/sections/TranslateDemo";
 import { WhatsNew } from "@/components/sections/WhatsNew";
 import { WhyLunar } from "@/components/sections/WhyLunar";
 import { getContent } from "@/content";
-import { alternatesFor } from "@/i18n/alternates";
 import type { Locale } from "@/i18n/routing";
 import { downloadButtonText } from "@/lib/download-text";
+import { pageMetadata, softwareJsonLd } from "@/lib/metadata";
 import { DOWNLOAD_URL, getRelease } from "@/lib/release";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return { alternates: alternatesFor("/", await getLocale()) };
+  return pageMetadata({ path: "/", locale: (await getLocale()) as Locale });
 }
 
 // The home page, in the order of PRD §7.1.
@@ -34,8 +34,15 @@ export default async function Home() {
 
   const downloadText = await downloadButtonText(locale, release);
 
+  const meta = await getTranslations("Metadata");
+
   return (
     <>
+      {/* Structured data for search engines: data, not a script that runs (see lib/metadata.ts). */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: softwareJsonLd(locale, meta("description"), release) }}
+      />
       <Hero
         title={content.hero.title}
         lead={content.hero.lead}

@@ -6,16 +6,13 @@ import { PageIntro } from "@/components/pages/PageIntro";
 import { SectionNav } from "@/components/pages/SectionNav";
 import { getContent } from "@/content";
 import type { LimitId, PageItem, WhyId } from "@/content/types";
-import { alternatesFor } from "@/i18n/alternates";
 import type { Locale } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
   const t = await getTranslations("Pages.features");
-  return {
-    title: `${t("title")} — Lunar`,
-    description: t("lead"),
-    alternates: alternatesFor("/features", await getLocale()),
-  };
+  return pageMetadata({ path: "/features", locale, title: t("title"), description: t("lead") });
 }
 
 /** Which limits belong next to which page or feature. */

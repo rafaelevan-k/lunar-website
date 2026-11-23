@@ -4,16 +4,13 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { PageIntro } from "@/components/pages/PageIntro";
 import { getContent } from "@/content";
 import { LUNAR_REPO_URL } from "@/content/site";
-import { alternatesFor } from "@/i18n/alternates";
 import type { Locale } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
   const t = await getTranslations("Pages.privacy");
-  return {
-    title: `${t("title")} — Lunar`,
-    description: t("lead"),
-    alternates: alternatesFor("/privacy", await getLocale()),
-  };
+  return pageMetadata({ path: "/privacy", locale, title: t("title"), description: t("lead") });
 }
 
 export default async function PrivacyPage() {
