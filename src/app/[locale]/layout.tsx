@@ -8,7 +8,6 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ReducedMotionProvider } from "@/components/motion/ReducedMotionProvider";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
-import { GOOGLE_SITE_VERIFICATION } from "@/content/site";
 import { SITE_URL } from "@/i18n/alternates";
 import { routing } from "@/i18n/routing";
 import { DEFAULT_MOTION, DEFAULT_THEME, PREFERENCE_SCRIPT } from "@/lib/preferences";
@@ -36,7 +35,6 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(SITE_URL),
     title: t("title"),
     description: t("description"),
-    verification: { google: GOOGLE_SITE_VERIFICATION },
   };
 }
 

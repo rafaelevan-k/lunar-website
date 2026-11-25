@@ -20,9 +20,19 @@ const nextConfig: NextConfig = {
   },
   // Don't announce the framework in a response header.
   poweredByHeader: false,
-  // English is the default language. No guessing from the browser: "/" always goes to /en.
   async redirects() {
-    return [{ source: "/", destination: "/en", permanent: false }];
+    return [
+      // The site moved from its old Vercel address to its own domain: send every old URL there
+      // for good. Only this exact host, so preview deployments keep working.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "lunar-rafaelevank.vercel.app" }],
+        destination: "https://lunar.rafaelevank.tech/:path*",
+        permanent: true,
+      },
+      // English is the default language. No guessing from the browser: "/" always goes to /en.
+      { source: "/", destination: "/en", permanent: false },
+    ];
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
