@@ -7,7 +7,7 @@
 A pair of eyes at the top of your screen that blink, glance around, and open into everything you reach for all day.
 This site lets you meet them before you install anything.
 
-[**Visit the site →**](https://lunar-rafaelevank.vercel.app) &nbsp;·&nbsp;
+[**Visit the site →**](https://lunar.rafaelevank.tech) &nbsp;·&nbsp;
 [Get Lunar](https://github.com/rafaelevan-k/lunar/releases/latest) &nbsp;·&nbsp;
 [Lunar on GitHub](https://github.com/rafaelevan-k/lunar)
 
