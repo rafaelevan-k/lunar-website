@@ -175,7 +175,7 @@ export const id = {
     recordings:
       "Lunar membuka mikrofon hanya saat Anda menekan Rekam, dan Windows menampilkan tanda mikrofonnya sendiri. Beri tahu orang lain sebelum Anda merekam mereka.",
     thisSite:
-      "Situs ini tidak memakai cookie, analytics, atau skrip pihak ketiga. Situs ini tidak memuat apa pun selain dari dirinya sendiri.",
+      "Situs ini tidak memakai cookie dan tidak memuat apa pun selain dari dirinya sendiri. Situs ini menghitung kunjungan halaman dengan Vercel Web Analytics, yaitu skrip dari situs ini sendiri yang tidak memasang cookie dan tidak menyimpan data pribadi: hanya halaman mana yang dilihat, situs mana yang menautkannya, serta perkiraan negara, browser, dan jenis perangkat pengunjung.",
     source: "README.md Your privacy; PRIVACY.md Summary, What is never logged, Recordings",
     table: [
       {

@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -74,6 +75,9 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
             </SmoothScroll>
           </ReducedMotionProvider>
         </NextIntlClientProvider>
+        {/* Vercel Web Analytics: cookieless page-view counts, served from this site (/_vercel/insights).
+            The privacy page tells visitors about it. */}
+        <Analytics />
       </body>
     </html>
   );

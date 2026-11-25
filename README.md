@@ -68,8 +68,8 @@ works from a 320 px phone to a wide desktop.
 
 - **Honest.** Every feature, number and limitation comes from Lunar's own repository. Lunar's limits are shown
   plainly: Windows 11 x64 only, not code-signed yet, tested with one monitor.
-- **Private.** No analytics, no cookies, no trackers, no third-party requests. A test fails if any page loads
-  anything from another site. Strict security headers (CSP, HSTS, `frame-ancestors 'none'`).
+- **Private.** No cookies, no trackers, no third-party requests. Page visits are counted with cookieless Vercel
+  Web Analytics, served from the site itself. A test fails if any page loads anything from another site. Strict security headers (CSP, HSTS, `frame-ancestors 'none'`).
 - **Always up to date.** The version, date, size and SHA-256 are read from GitHub Releases when the site is built.
   Publishing a Lunar release triggers a rebuild. Downloads always come from GitHub; the site never hosts the
   installer.

@@ -175,7 +175,7 @@ export const en = {
     recordings:
       "Lunar opens your microphone only when you press Record, and Windows shows its own microphone indicator. Please tell people before you record them.",
     thisSite:
-      "This website uses no cookies, no analytics and no third-party scripts. It loads nothing from anywhere but itself.",
+      "This website uses no cookies and loads nothing from anywhere but itself. It counts page visits with Vercel Web Analytics, a script served from this site that sets no cookies and keeps no personal data: only which pages are viewed, which site linked to them, and roughly which country, browser and kind of device they were viewed from.",
     source: "README.md Your privacy; PRIVACY.md Summary, What is never logged, Recordings",
     table: [
       {

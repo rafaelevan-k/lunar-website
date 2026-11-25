@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-// No analytics, fonts, embeds or anything else from another origin (AGENTS.md §10), on every page,
+// No fonts, embeds, trackers or anything else from another origin (AGENTS.md §10), on every page,
 // including what loads later while scrolling (the 3D chunk, lazy sections).
 const PAGES = [
   "/en",
